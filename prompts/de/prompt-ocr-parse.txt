@@ -1,0 +1,5 @@
+Extrahieren Sie den Text and Sätze aus der folgenden OCR-Ausgabe:
+
+{input}
+
+Stellen Sie den extrahierten Text und Sätze in einem sauberen und lesbaren Format bereit, ohne zusätzliche Informationen oder Interpretationen.

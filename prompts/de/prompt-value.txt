@@ -1,0 +1,7 @@
+Ihre Aufgabe ist es, zu beurteilen, ob die angegebene Eingabe vollständige Informationen zu einem oder mehreren Terminen enthält.
+
+Die zu bewertende Eingabe (eine Instagram Caption):
+{input}
+
+Antworten Sie nur mit „true“ oder „false“, ohne zusätzlichen Text oder Erläuterungen.
+
