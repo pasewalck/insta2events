@@ -1,12 +1,12 @@
 [project]
-name = "Instagram 2 Bewegungskalender"
+name = "Instagram2Bewegungskalender"
 version = "0.1.0"
 description = "This project implements a combination of existing software to scrape, analyze, and interpret Instagram posts and filter out any events found using an LLM."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "easyocr>=1.7.2",
-    "instaloader>=4.14.2",
+    "instaloader==4.15",
     "ollama==0.4.4",
     "dotenv>=0.9.9",
 ]
