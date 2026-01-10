@@ -37,7 +37,7 @@ german_months = ["januar", "februar", "märz", "april", "mai", "juni", "juli", "
                  "november", "dezember"]
 
 # Dates Pattern (format: DD.MM.YYYY or other similar formats)
-date_pattern = r'\d{1,2}[.\-\/][ ]\d{1,2}[.\-\/]'
+date_pattern = r'/\d{1,2}[.\-\/][ ]?\d{1,2}[.\-\/]/'
 
 
 def main():
