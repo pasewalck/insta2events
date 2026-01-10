@@ -235,28 +235,26 @@ dependencies = [
     { name = "easyocr" },
     { name = "instaloader" },
     { name = "ollama" },
-    { name = "pytesseract" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "dotenv", specifier = ">=0.9.9" },
     { name = "easyocr", specifier = ">=1.7.2" },
-    { name = "instaloader", specifier = ">=4.14.2" },
+    { name = "instaloader", specifier = "==4.15" },
     { name = "ollama", specifier = "==0.4.4" },
-    { name = "pytesseract", specifier = ">=0.3.13" },
 ]
 
 [[package]]
 name = "instaloader"
-version = "4.14.2"
+version = "4.15"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/54/c3/55d75581c322a58adb3a9b10dd50a232b47cd7afb5feac86c47496d6e1d9/instaloader-4.14.2.tar.gz", hash = "sha256:e9205098e6ec494cdfe2aef6c56805084cef4008a06d4d78504301f42f8e4d33", size = 65978, upload-time = "2025-07-18T05:51:13.8Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d1/38/f82de9f71d6b8403f5b752d8eab4e466ac99c237ec8c642548a544948f23/instaloader-4.15.tar.gz", hash = "sha256:baf1c29ba16f9d30f7c6e330a00bc1fca100522bb3a217d3c36ad620eb744685", size = 66295, upload-time = "2025-11-08T21:30:32.06Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d5/78/6d8b2dc432c98ff4592be740826605986846d866c53587f2e14937255642/instaloader-4.14.2-py3-none-any.whl", hash = "sha256:e8c72410405fcbfd16c6e0034a10bccce634d91d59b1b0664b7de813be9d27fd", size = 67970, upload-time = "2025-07-18T05:51:12.512Z" },
+    { url = "https://files.pythonhosted.org/packages/96/7a/2e878dff89aa2ec8ffa6367aad31975e5d457ff303b8ea7568fd284e301c/instaloader-4.15-py3-none-any.whl", hash = "sha256:ba897ec738c238bdc427ad3f4a3478c6d2db07055361f2373779af8227ac2c08", size = 68310, upload-time = "2025-11-08T21:30:30.777Z" },
 ]
 
 [[package]]
@@ -874,19 +872,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/ed/f2/ab385dbd94a052c62224b99cf99002eee99dbec40e10006c78575aead256/pydantic_core-2.41.4-pp311-pypy311_pp73-musllinux_1_1_armv7l.whl", hash = "sha256:ca4df25762cf71308c446e33c9b1fdca2923a3f13de616e2a949f38bf21ff5a8", size = 2311296, upload-time = "2025-10-14T10:23:40.145Z" },
     { url = "https://files.pythonhosted.org/packages/fc/8e/e4f12afe1beeb9823bba5375f8f258df0cc61b056b0195fb1cf9f62a1a58/pydantic_core-2.41.4-pp311-pypy311_pp73-musllinux_1_1_x86_64.whl", hash = "sha256:5a28fcedd762349519276c36634e71853b4541079cab4acaaac60c4421827308", size = 2315386, upload-time = "2025-10-14T10:23:42.624Z" },
     { url = "https://files.pythonhosted.org/packages/48/f7/925f65d930802e3ea2eb4d5afa4cb8730c8dc0d2cb89a59dc4ed2fcb2d74/pydantic_core-2.41.4-pp311-pypy311_pp73-win_amd64.whl", hash = "sha256:c173ddcd86afd2535e2b695217e82191580663a1d1928239f877f5a1649ef39f", size = 2147775, upload-time = "2025-10-14T10:23:45.406Z" },
-]
-
-[[package]]
-name = "pytesseract"
-version = "0.3.13"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "packaging" },
-    { name = "pillow" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/9f/a6/7d679b83c285974a7cb94d739b461fa7e7a9b17a3abfd7bf6cbc5c2394b0/pytesseract-0.3.13.tar.gz", hash = "sha256:4bf5f880c99406f52a3cfc2633e42d9dc67615e69d8a509d74867d3baddb5db9", size = 17689, upload-time = "2024-08-16T02:33:56.762Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/7a/33/8312d7ce74670c9d39a532b2c246a853861120486be9443eebf048043637/pytesseract-0.3.13-py3-none-any.whl", hash = "sha256:7a99c6c2ac598360693d83a416e36e0b33a67638bb9d77fdcac094a3589d4b34", size = 14705, upload-time = "2024-08-16T02:36:10.09Z" },
 ]
 
 [[package]]
