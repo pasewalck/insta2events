@@ -1,10 +1,10 @@
 import os
 
-from config import PROMPT_OCR_PARSE_FILE, DATA_PARENT_FOLDER, \
-    POSTS_FOLDER_NAME, OCR_OUTPUT_FILE_NAME, OCR_OUTPUT_PARSED_FILE_NAME
-from llm import ask, load_ai_prompt
 from tracker import use_tracker, PostTracker
+from util.config import PROMPT_OCR_PARSE_FILE, DATA_PARENT_FOLDER, \
+    POSTS_FOLDER_NAME, OCR_OUTPUT_FILE_NAME, OCR_OUTPUT_PARSED_FILE_NAME
 from util.files_operations import load_file, write_file
+from util.llm import ask, load_ai_prompt
 
 # Load prompts
 prompt_ocr_improve = load_ai_prompt(PROMPT_OCR_PARSE_FILE)

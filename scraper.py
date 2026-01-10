@@ -5,9 +5,9 @@ import instaloader
 from instaloader import Instaloader, Profile, QueryReturnedNotFoundException, Hashtag
 from numpy.f2py.auxfuncs import throw_error
 
-from config import DATA_PARENT_FOLDER, LOGIN_SESSION_FILE, LOGIN_USERNAME, SCRAPE_ACCOUNTS, SCRAPE_HASHTAGS, \
-    POSTS_FOLDER_NAME, SYNC_SINCE
 from tracker import SocialMediaTracker, PostTracker, use_tracker, AccountDetails
+from util.config import DATA_PARENT_FOLDER, LOGIN_SESSION_FILE, LOGIN_USERNAME, SCRAPE_ACCOUNTS, SCRAPE_HASHTAGS, \
+    POSTS_FOLDER_NAME, SYNC_SINCE
 
 account_usernames = SCRAPE_ACCOUNTS.split(",") if SCRAPE_ACCOUNTS != "" else []
 hashtags = SCRAPE_HASHTAGS.split(",") if SCRAPE_ACCOUNTS != "" else []
