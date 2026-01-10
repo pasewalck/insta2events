@@ -72,6 +72,14 @@ Scrape all content:
 
 ```uv run ocr_reader.py```
 
+(Optionally) Run OCR improver:
+
+```uv run improve_ocr_data.py```
+
+Classify all posts (decides if post has data on events/dates):
+
+```uv run classifier.py```
+
 Run LLMs on content (Specify whether to use OCR results in environment variables):
 
 ```uv run interpreter.py```
