@@ -1,10 +1,11 @@
+import json
 import os
 
 from tracker import use_tracker, PostTracker
 from util.config import DATA_PARENT_FOLDER, \
     INTERPRETER_USE_OCR, \
     PROMPT_PARSE_FILE, POSTS_FOLDER_NAME, OCR_OUTPUT_FILE_NAME, LLM_OUTPUT_FILE_NAME, RERUN_INTERPRETER, \
-    OCR_OUTPUT_PARSED_FILE_NAME
+    OCR_OUTPUT_INTERPRETED_FILE_NAME
 from util.files_operations import load_file, write_json
 from util.llm import ask, load_ai_prompt
 
@@ -30,7 +31,7 @@ def run_interpreter(post: PostTracker):
 
     content_caption = load_file(os.path.join(directory, "data.txt"), None)
 
-    ocr_data = load_file(os.path.join(directory, OCR_OUTPUT_PARSED_FILE_NAME), "None") \
+    ocr_data = load_file(os.path.join(directory, OCR_OUTPUT_INTERPRETED_FILE_NAME), "None") \
         if post.ocr_improved \
         else load_file(os.path.join(directory, OCR_OUTPUT_FILE_NAME), "None")
 
