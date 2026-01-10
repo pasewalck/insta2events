@@ -41,8 +41,9 @@ def check_file_exists(file_path):
 def main():
     with use_tracker() as sync_tracker:
 
-        for post in sync_tracker.posts:
-            if not post.interpreted:
+        for post in sync_tracker.posts.values():
+            print(post.media_id)
+            if not post.interpreted or RERUN_INTERPRETER:
                 run_interpreter(post)
                 post.interpreted = True
 
