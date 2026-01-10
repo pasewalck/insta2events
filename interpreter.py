@@ -4,8 +4,7 @@ import os
 from tracker import use_tracker, PostTracker
 from util.config import DATA_PARENT_FOLDER, \
     INTERPRETER_USE_OCR, \
-    PROMPT_PARSE_FILE, POSTS_FOLDER_NAME, OCR_OUTPUT_FILE_NAME, LLM_OUTPUT_FILE_NAME, RERUN_INTERPRETER, \
-    OCR_OUTPUT_INTERPRETED_FILE_NAME
+    PROMPT_PARSE_FILE, POSTS_FOLDER_NAME, OCR_OUTPUT_FILE_NAME, LLM_OUTPUT_FILE_NAME, RERUN_INTERPRETER
 from util.files_operations import load_file, write_json
 from util.llm import ask, load_ai_prompt
 
