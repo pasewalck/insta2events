@@ -31,17 +31,14 @@ def run_interpreter(post: PostTracker):
 
     content_caption = load_file(os.path.join(directory, "data.txt"), None)
 
-    ocr_data = load_file(os.path.join(directory, OCR_OUTPUT_INTERPRETED_FILE_NAME), "None") \
-        if post.ocr_improved \
-        else load_file(os.path.join(directory, OCR_OUTPUT_FILE_NAME), "None")
-
-    use_ocr = INTERPRETER_USE_OCR and ocr_data is not None
-
     result = parse_content(
         prompt_parse.replace(
             "{input}", content_caption
         ).replace(
-            "{input_ocr}", ocr_data if use_ocr else "None"
+            "{input_ocr}",
+            load_file(os.path.join(directory, OCR_OUTPUT_FILE_NAME), "No OCR Data.")
+            if INTERPRETER_USE_OCR
+            else "None"
         ).replace(
             "{owner_link}", post.account_details.link
         ).replace(
