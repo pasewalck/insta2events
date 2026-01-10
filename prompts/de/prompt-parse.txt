@@ -1,17 +1,32 @@
 Die Aufgabe ist es, ein oder mehrere Termine in einer Eingabe zu finden.
-Wenn kein Jahr gefunden wird, ist ein Termin im aktuellen Jahr: {year}.
 Geben alle Termine als Einträge in einem Array mit den folgenden Eigenschaften zurück:
-- title
-- start_date (im ISO 8601-Format)
-- location
-Optionale Eigenschaften:
-- end_date (im ISO 8601-Format)
-- start_time (im ISO 8601-Format)
-- end_time (im ISO 8601-Format)
-- description
+- title (thema)
+- type (art des Termins / Events)
+- location (ort oder link)
+- start_datetime (im ISO 8601-Format)
+- end_datetime (im ISO 8601-Format)
+- description (was passiert bei dem Termin / Event und wichtige Infos)
+- link
 
-Wenn Termine kein datum oder ort haben, geben Sie ein leeres Array zurück.
-Die zu bewertende Eingabe (eine Instagram Caption):
+Wenn Termine kein datum haben, geben Sie ein leeres Array zurück.
+Wenn kein Jahr gefunden wird, ist ein Termin im aktuellen Jahr: {year}.
+
+-- Begin der zu bewertenden Eingaben (Caption) --
+
 {input}
 
+-- Ende der zu bewertenden Eingaben --
+
+-- Begin der zu bewertenden Zusatzeingaben (OCR Result), Nur verwenden, wenn Caption nicht ausreicht! --
+
+{input_ocr}
+
+-- Ende der zu bewertenden Eingaben --
+
+
 Bitte antworten Sie nur mit einem JSON-Array, ohne zusätzlichen Text oder Erläuterungen.
+
+Zusätzliche Informationen über den Account hinter dem Post:
+Name: {owner_name}
+Bio: {owner_bio}
+Link: {owner_link}
