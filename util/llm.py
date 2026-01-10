@@ -2,7 +2,7 @@ import datetime
 
 from ollama import chat
 
-from config import MODEL_LARGE, MODEL_SMALL
+from util.config import MODEL_LARGE, MODEL_SMALL
 from util.files_operations import load_file
 
 
