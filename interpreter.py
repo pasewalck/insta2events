@@ -51,9 +51,9 @@ def run_interpreter(post: PostTracker):
         )
     )
 
-    print(f"Parsed: {result}" if result != [] and result != "[]" else f"Parse failed!")
+    print(f"Parsed: {result}" if result != "[]" else f"Parse failed!")
 
-    write_json(os.path.join(directory, LLM_OUTPUT_FILE_NAME), result)
+    write_json(os.path.join(directory, LLM_OUTPUT_FILE_NAME), json.loads(result))
 
 
 if __name__ == "__main__":
