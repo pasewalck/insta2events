@@ -67,7 +67,8 @@ def download(instaloader_instance: Instaloader, mode, target_username_or_hashtag
 
 def main():
     l = instaloader.Instaloader(dirname_pattern=f"{DATA_PARENT_FOLDER}/{POSTS_FOLDER_NAME}/{{mediaid}}",
-                                filename_pattern=DATA_PARENT_FOLDER, download_videos=False)
+                                filename_pattern=DATA_PARENT_FOLDER, download_videos=False,
+                                download_pictures=DOWNLOAD_PHOTOS)
     if LOGIN_USERNAME is not None and LOGIN_SESSION_FILE is not None:
         l.load_session_from_file(LOGIN_USERNAME, LOGIN_SESSION_FILE)
         print("Instaloader initialized with login")
