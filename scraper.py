@@ -30,10 +30,6 @@ def download(instaloader_instance: Instaloader, mode, target_username_or_hashtag
 
     identifier = f"profile.{item.userid}" if mode is Profile else f"hashtag.{item.name}"
 
-    legacy_identifier = f"{item.userid}" if mode is Profile else f"#{item.name}"
-    if sync_tracker.sync_states.get(legacy_identifier, None) is not None:
-        sync_tracker.sync_states[identifier] = sync_tracker.sync_states[legacy_identifier]
-
     posts = item.get_posts() if mode is Profile else item.get_posts_resumable()
     sync_state = sync_tracker.sync_states.get(identifier, datetime.fromisoformat(SYNC_SINCE))
 
