@@ -2,7 +2,8 @@ from datetime import datetime
 from itertools import dropwhile, takewhile
 
 import instaloader
-from instaloader import Instaloader, Hashtag, Profile, QueryReturnedNotFoundException
+from instaloader import Instaloader, Profile, QueryReturnedNotFoundException, Hashtag
+from numpy.f2py.auxfuncs import throw_error
 
 from config import DATA_PARENT_FOLDER, LOGIN_SESSION_FILE, LOGIN_USERNAME, SCRAPE_ACCOUNTS, SCRAPE_HASHTAGS, \
     POSTS_FOLDER_NAME, SYNC_SINCE
@@ -14,36 +15,53 @@ hashtags = SCRAPE_HASHTAGS.split(",") if SCRAPE_ACCOUNTS != "" else []
 until = datetime.now()
 
 
-def download(l: Instaloader, mode, target, sync_tracker: SocialMediaTracker):
+def download(instaloader_instance: Instaloader, mode, target_username_or_hashtag: str,
+             sync_tracker: SocialMediaTracker):
+    if mode is not Profile and mode is not Hashtag:
+        throw_error("Mode is Invalid!")
+        return
     try:
-        obj = instaloader.Profile.from_username(l.context,
-                                                target) if mode == Profile else instaloader.Hashtag.from_name(
-            l.context, target)
+        if mode is Profile:
+            item = instaloader.Profile.from_username(instaloader_instance.context, target_username_or_hashtag)
+        else:
+            item = instaloader.Hashtag.from_name(instaloader_instance.context, target_username_or_hashtag)
     except QueryReturnedNotFoundException:
         return
 
-    identifier = obj.userid if mode is Profile else (f"#{obj.name}" if mode is Hashtag else None)
-    posts = obj.get_posts() if mode is Profile else obj.get_posts_resumable()
-    sync_state = sync_tracker.sync_states[
-        identifier] if sync_tracker.sync_states.get(identifier) is not None else datetime.fromisoformat(
-        SYNC_SINCE)
+    identifier = f"profile.{item.userid}" if mode is Profile else f"hashtag.{item.name}"
+
+    legacy_identifier = f"{item.userid}" if mode is Profile else f"#{item.name}"
+    if sync_tracker.sync_states.get(legacy_identifier, None) is not None:
+        sync_tracker.sync_states[identifier] = sync_tracker.sync_states[legacy_identifier]
+
+    posts = item.get_posts() if mode is Profile else item.get_posts_resumable()
+    sync_state = sync_tracker.sync_states.get(identifier, datetime.fromisoformat(SYNC_SINCE))
+
     print(f"Scraping for {identifier} since latest sync state: {sync_state.strftime('%Y-%m-%d %H:%M:%S')}")
-    posts = takewhile(lambda p: p.date > sync_state, dropwhile(lambda p: p.date > until, posts))
-    i_tracker = 0
-    for post in posts:
-        l.download_post(post, post.mediaid)
-        if sync_tracker.posts.get(post.mediaid) is not None:
+
+    posts_to_download = takewhile(lambda p: p.date > sync_state, dropwhile(lambda p: p.date > until, posts))
+    posts_count = 0
+
+    for post in posts_to_download:
+        instaloader_instance.download_post(post, post.mediaid)
+        account_details = AccountDetails(
+            post.owner_profile.username,
+            post.owner_profile.userid,
+            post.owner_profile.biography,
+            post.owner_profile.external_url
+        )
+
+        if post.mediaid in sync_tracker.posts:
             sync_tracker.posts[post.mediaid].sources.append(identifier)
         else:
-            owner_profile = post.owner_profile
-            account_details = AccountDetails(owner_profile.username, owner_profile.userid, owner_profile.biography,
-                                             owner_profile.external_url)
-            print(owner_profile.external_url)
-            sync_tracker.posts[post.mediaid] = (PostTracker(post.mediaid, post.date, True, identifier, account_details))
-        i_tracker += 1
-        print(f"{i_tracker}/?")
+            print(post.owner_profile.external_url)
+            sync_tracker.posts[post.mediaid] = PostTracker(post.mediaid, post.date, True, identifier, account_details)
+
+        posts_count += 1
+        print(f"{posts_count}/?")
+
     sync_tracker.sync_states[identifier] = until
-    print(f"Scraped {i_tracker} for {identifier}")
+    print(f"Scraped {posts_count} for {identifier}")
 
 
 def main():
