@@ -17,6 +17,7 @@ PROMPT_PARSE_FILE = os.getenv("PROMPT_PARSE_FILE", "../prompts/de/prompt-parse.t
 MODEL_SMALL = os.getenv("MODEL_SMALL", "qwen2.5:3b")
 MODEL_LARGE = os.getenv("MODEL_LARGE", "qwen2.5")
 INTERPRETER_USE_OCR = os.getenv("INTERPRETER_USE_OCR", False)
+DOWNLOAD_PHOTOS = os.getenv("DOWNLOAD_PHOTOS", True)
 CLASSIFIER_USE_OCR = os.getenv("CLASSIFIER_USE_OCR", False)
 INTERPRETER_CLASSIFIER_MODE = os.getenv("INTERPRETER_CLASSIFIER_MODE", "basic")
 LOGIN_USERNAME = os.getenv("LOGIN_USERNAME")

@@ -7,7 +7,7 @@ from numpy.f2py.auxfuncs import throw_error
 
 from tracker import SocialMediaTracker, PostTracker, use_tracker, AccountDetails
 from util.config import DATA_PARENT_FOLDER, LOGIN_SESSION_FILE, LOGIN_USERNAME, SCRAPE_ACCOUNTS, SCRAPE_HASHTAGS, \
-    POSTS_FOLDER_NAME, SYNC_SINCE
+    POSTS_FOLDER_NAME, SYNC_SINCE, DOWNLOAD_PHOTOS
 
 account_usernames = SCRAPE_ACCOUNTS.split(",") if SCRAPE_ACCOUNTS != "" else []
 hashtags = SCRAPE_HASHTAGS.split(",") if SCRAPE_ACCOUNTS != "" else []
@@ -55,7 +55,8 @@ def download(instaloader_instance: Instaloader, mode, target_username_or_hashtag
             sync_tracker.posts[post.mediaid].sources.append(identifier)
         else:
             print(post.owner_profile.external_url)
-            sync_tracker.posts[post.mediaid] = PostTracker(post.mediaid, post.date, True, identifier, account_details)
+            sync_tracker.posts[post.mediaid] = PostTracker(post.mediaid, post.date, DOWNLOAD_PHOTOS, identifier,
+                                                           account_details)
 
         posts_count += 1
         print(f"{posts_count}/?")
