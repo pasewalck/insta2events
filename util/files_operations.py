@@ -10,6 +10,11 @@ def load_json(file_path, default_json):
         return default_json
 
 
+def write_file(file_path, text):
+    with open(file_path, 'w', encoding='utf-8') as file:
+        file.write(text)
+
+
 def write_json(file_path, data):
     with open(file_path, 'w', encoding='utf-8') as json_file:
         json.dump(data, json_file, indent=4, ensure_ascii=False)

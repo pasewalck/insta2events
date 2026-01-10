@@ -12,6 +12,9 @@ class PostTracker:
         self.photos_downloaded = photos_downloaded
         self.ocr_ran = False
         self.interpreted = False
+        self.classified = False
+        self.ocr_improved = False
+        self.classified_as_event = False
         self.account_details: AccountDetails = account_details
         self.sources = [source]
 
@@ -31,5 +34,4 @@ class SocialMediaTracker:
 
 
 def use_tracker() -> ContextManager[SocialMediaTracker]:
-    return use_pickel(os.path.join(DATA_PARENT_FOLDER, SYNC_FILE_NAME),
-                      SocialMediaTracker())
+    return use_pickel(os.path.join(DATA_PARENT_FOLDER, SYNC_FILE_NAME), SocialMediaTracker())
