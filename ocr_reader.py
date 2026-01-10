@@ -80,7 +80,7 @@ def main():
 
     with use_tracker() as sync_tracker:
 
-        for post in sync_tracker.posts:
+        for post in sync_tracker.posts.values():
             if not post.ocr_ran:
                 run_ocr(post, reader)
                 post.ocr_ran = True
