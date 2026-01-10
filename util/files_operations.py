@@ -15,6 +15,9 @@ def write_json(file_path, data):
         json.dump(data, json_file, indent=4, ensure_ascii=False)
 
 
-def load_file(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        return file.read()
+def load_file(file_path, default=None):
+    if os.path.exists(file_path):
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return file.read()
+    else:
+        return default
