@@ -44,9 +44,10 @@ def run_interpreter(post: PostTracker):
         ).replace(
             "{owner_link}", post.account_details.link
         ).replace(
-
-            "{owner_name}", post.account_details.name).replace(
-            "{owner_bio}", post.account_details.bio)
+            "{owner_name}", post.account_details.name)
+        .replace(
+            "{owner_bio}", post.account_details.bio
+        )
     )
 
     print(f"Parsed: {result}" if result != [] and result != "[]" else f"Parse failed!")
