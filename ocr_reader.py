@@ -3,8 +3,8 @@ import os
 import cv2
 import easyocr
 
-from config import POSTS_FOLDER_NAME, DATA_PARENT_FOLDER, OCR_OUTPUT_FILE_NAME
 from tracker import use_tracker, PostTracker
+from util.config import POSTS_FOLDER_NAME, DATA_PARENT_FOLDER, OCR_OUTPUT_FILE_NAME
 from util.files_operations import write_json
 
 

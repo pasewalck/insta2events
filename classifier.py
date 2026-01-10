@@ -3,12 +3,12 @@ import re
 
 from numpy.f2py.auxfuncs import throw_error
 
-from config import PROMPT_VALUE_FILE, DATA_PARENT_FOLDER, \
+from tracker import use_tracker, PostTracker
+from util.config import PROMPT_VALUE_FILE, DATA_PARENT_FOLDER, \
     POSTS_FOLDER_NAME, OCR_OUTPUT_FILE_NAME, INTERPRETER_CLASSIFIER_MODE, \
     RERUN_CLASSIFIER, CLASSIFIER_USE_OCR
-from llm import ask, load_ai_prompt
-from tracker import use_tracker, PostTracker
 from util.files_operations import load_file
+from util.llm import ask, load_ai_prompt
 
 # Load prompts
 classifier_prompt = load_ai_prompt(PROMPT_VALUE_FILE)

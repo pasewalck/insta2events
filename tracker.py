@@ -1,7 +1,7 @@
 import os
 from typing import ContextManager
 
-from config import DATA_PARENT_FOLDER, SYNC_FILE_NAME
+from util.config import DATA_PARENT_FOLDER, SYNC_FILE_NAME
 from util.use_pickel import use_pickel
 
 
