@@ -49,8 +49,8 @@ Decide what large-(vision)-language models to use. Download these with Ollama an
 The default values are:
 
 ```
-MODEL_LARGE=gemma3:4b
-MODEL_SMALL=deepseek-r1:8b
+MODEL_SMALL=gemma3:4b
+MODEL_LARGE=deepseek-r1:8b
 MODEL_VISION=llama3.2-vision
 ```
 
