@@ -98,7 +98,8 @@ and compensations.
 For classification however already smaller models such as `gemma3:4b` seem to be okay, however the basic classifier
 proves to be very effective as well and I would actually recommend it over the llm based classifier.
 
-Due to me not owning a GPU I can only suggest options!
+Due to me not owning a GPU I have not been able to test vision models that much, but results so far seem more promising
+than using classic ocr result passed to a llm.
 
 ## License and Warranty
 
