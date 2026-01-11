@@ -73,7 +73,7 @@ def group_adjacent_text(results, threshold_x=10, threshold_y=10, filter_confiden
 
 
 def main():
-    reader = easyocr.Reader(['de'])
+    reader = easyocr.Reader(['de', 'en'])
 
     with use_tracker() as sync_tracker:
 
