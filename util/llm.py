@@ -69,11 +69,11 @@ def llm_parse_events(post: PostTracker):
     ), True, Events.model_json_schema()))["events"]
 
 
-def llm_classify(post: PostTracker):
+def llm_classify(post: PostTracker, large_model):
     classifier_prompt = load_ai_prompt(PROMPT_VALUE_FILE)
     return json.loads(ask(classifier_prompt.replace("{input}", post.caption()).replace(
         "{input_ocr}",
         post.ocr_output()
         if INTERPRETER_USE_OCR
         else "None"
-    ), False, EventEval.model_json_schema()))
+    ), large_model, EventEval.model_json_schema()))
