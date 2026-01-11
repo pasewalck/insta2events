@@ -21,6 +21,13 @@ class PostTracker:
     def directory(self):
         return os.path.join(DATA_PARENT_FOLDER, POSTS_FOLDER_NAME, f"{self.media_id}")
 
+    def get_image_paths(self):
+        image_paths = []
+        for filename in os.listdir(self.directory()):
+            if filename.endswith(('.png', '.jpg', '.webp')):
+                image_paths.pop(os.path.join(self.directory(), filename))
+        return image_paths
+
     def caption(self):
         return load_file(os.path.join(self.directory(), "data.txt"), None)
 
