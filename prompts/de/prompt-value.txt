@@ -1,7 +1,14 @@
-Ihre Aufgabe ist es, zu beurteilen, ob die angegebene Eingabe vollständige Informationen zu einem oder mehreren Terminen enthält.
+Ihre Aufgabe ist es, zu beurteilen, ob die angegebene Eingabe Informationen zu einem oder mehreren Terminen enthält.
 
-Die zu bewertende Eingabe (eine Instagram Caption):
+-- Begin der zu bewertenden Eingaben (Caption) --
+
 {input}
 
-Antworten Sie nur mit „true“ oder „false“, ohne zusätzlichen Text oder Erläuterungen.
+-- Ende der zu bewertenden Eingaben --
+
+-- Begin der zu bewertenden Zusatzeingaben (OCR Result), Nur verwenden, wenn Caption nicht ausreicht! --
+
+{input_ocr}
+
+-- Ende der zu bewertenden Eingaben --
 

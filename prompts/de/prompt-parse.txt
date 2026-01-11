@@ -1,15 +1,5 @@
 Die Aufgabe ist es, ein oder mehrere Termine in einer Eingabe zu finden.
-Geben alle Termine als Einträge in einem Array mit den folgenden Eigenschaften zurück:
-- title (thema)
-- type (art des Termins / Events)
-- location (ort oder link)
-- start_datetime (im ISO 8601-Format)
-- end_datetime (im ISO 8601-Format)
-- description (was passiert bei dem Termin / Event und wichtige Infos)
-- link
-
-Wenn Termine kein datum haben, geben Sie ein leeres Array zurück.
-Wenn kein Jahr gefunden wird, ist ein Termin im aktuellen Jahr: {year}.
+Wenn kein Jahr gefunden wird, ist ein Termin im aktuellen Jahr: {year}. Wenn nicht genug Information gegeben sind, gebe keine Termine zurück.
 
 -- Begin der zu bewertenden Eingaben (Caption) --
 
@@ -22,9 +12,6 @@ Wenn kein Jahr gefunden wird, ist ein Termin im aktuellen Jahr: {year}.
 {input_ocr}
 
 -- Ende der zu bewertenden Eingaben --
-
-
-Bitte antworten Sie nur mit einem JSON-Array, ohne zusätzlichen Text oder Erläuterungen.
 
 Zusätzliche Informationen über den Account hinter dem Post:
 Name: {owner_name}
