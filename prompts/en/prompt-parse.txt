@@ -1,0 +1,19 @@
+The task is to find one or more dates in an input.
+If no year is found, the date is in the current year: {year}. If there is not enough information, do not return any dates.
+
+-- Start of inputs to be evaluated (caption) --
+
+{input}
+
+-- End of inputs to be evaluated --
+
+-- Start of additional entries to be evaluated (OCR Result), only use if Caption is not sufficient! --
+
+{input_ocr}
+
+-- End of entries to be evaluated --
+
+Additional information about the account behind the post:
+Name: {owner_name}
+Bio: {owner_bio}
+Link: {owner_link}

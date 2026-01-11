@@ -1,0 +1,13 @@
+Your task is to assess whether the specified input contains information about one or more dates.
+
+-- Start of inputs to be evaluated (caption) --
+
+{input}
+
+-- End of entries to be evaluated --
+
+-- Start of additional entries to be evaluated (OCR Result), only use if Caption is not sufficient! --
+
+{input_ocr}
+
+-- End of entries to be evaluated --
