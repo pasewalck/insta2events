@@ -6,7 +6,7 @@ from tracker import use_tracker, PostTracker
 from util.basic_classifier import classic_classifier
 from util.config import INTERPRETER_CLASSIFIER_MODE, \
     RERUN_CLASSIFIER
-from util.llm import llm_classify
+from util.ollama_client import llm_classify
 
 
 def main():

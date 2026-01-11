@@ -3,7 +3,7 @@ import os
 from tracker import use_tracker, PostTracker
 from util.config import LLM_OUTPUT_FILE_NAME, RERUN_INTERPRETER
 from util.files_operations import write_json
-from util.llm import llm_parse_events
+from util.ollama_client import llm_parse_events
 
 
 def main():
