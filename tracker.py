@@ -13,7 +13,6 @@ class PostTracker:
         self.ocr_ran = False
         self.interpreted = False
         self.classified = False
-        self.ocr_improved = False
         self.classified_as_event = False
         self.account_details: AccountDetails = account_details
         self.sources = [source]
