@@ -7,7 +7,7 @@ from pydantic import BaseModel
 
 from tracker import PostTracker
 from util.config import MODEL_LARGE, MODEL_SMALL, PROMPT_PARSE_FILE, INTERPRETER_USE_OCR, PROMPT_VALUE_FILE, \
-    LLM_PASS_IMAGES_DIRECTLY, PROMPT_PARSE_VISION_FILE
+    LLM_PASS_IMAGES_DIRECTLY, PROMPT_PARSE_VISION_FILE, MODEL_VISION
 from util.files_operations import load_file
 
 
@@ -43,7 +43,7 @@ def ask(message, large_model, model, images=None):
     messages = [{"role": "user", "content": message, "images": images}] if images is not None else [
         {"role": "user", "content": message}]
     response = chat(
-        model=MODEL_LARGE if large_model else MODEL_SMALL,
+        model=(MODEL_LARGE if large_model else MODEL_SMALL) if images is None else MODEL_VISION,
         messages=messages,
         format=model,
     )

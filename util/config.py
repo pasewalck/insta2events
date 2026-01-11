@@ -16,6 +16,7 @@ PROMPT_PARSE_FILE = os.getenv("PROMPT_PARSE_FILE", "./prompts/en/prompt-parse.tx
 LLM_PASS_IMAGES_DIRECTLY = os.getenv("LLM_PASS_IMAGES_DIRECTLY", False)
 MODEL_SMALL = os.getenv("MODEL_SMALL", "gemma3:4b")
 MODEL_LARGE = os.getenv("MODEL_LARGE", "deepseek-r1:8b")
+MODEL_VISION = os.getenv("MODEL_VISION", "llama3.2-vision")
 INTERPRETER_USE_OCR = os.getenv("INTERPRETER_USE_OCR", False)
 DOWNLOAD_PHOTOS = os.getenv("DOWNLOAD_PHOTOS", True)
 CLASSIFIER_USE_OCR = os.getenv("CLASSIFIER_USE_OCR", False)
