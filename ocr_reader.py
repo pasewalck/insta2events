@@ -4,17 +4,16 @@ import cv2
 import easyocr
 
 from tracker import use_tracker, PostTracker
-from util.config import POSTS_FOLDER_NAME, DATA_PARENT_FOLDER, OCR_OUTPUT_FILE_NAME
+from util.config import OCR_OUTPUT_FILE_NAME
 from util.files_operations import write_json
 
 
 def run_ocr(post: PostTracker, reader: easyocr.Reader):
-    directory = os.path.join(DATA_PARENT_FOLDER, POSTS_FOLDER_NAME, f"{post.media_id}")
     output_raw = []
     output_cleaned = []
-    for filename in os.listdir(directory):
+    for filename in os.listdir(post.directory()):
         if filename.endswith(('.png', '.jpg', '.webp')):
-            image_path = os.path.join(directory, filename)
+            image_path = os.path.join(post.directory(), filename)
 
             try:
                 image = cv2.imread(image_path)
@@ -28,7 +27,7 @@ def run_ocr(post: PostTracker, reader: easyocr.Reader):
                 print(f"An unexpected error occurred: {e}")
 
     print(f"For {post.media_id} OCR Results: \n Raw: {raw_result} \n Cleaned: {output_cleaned}")
-    write_json(os.path.join(directory, OCR_OUTPUT_FILE_NAME), output_cleaned)
+    write_json(os.path.join(post.directory(), OCR_OUTPUT_FILE_NAME), output_cleaned)
 
 
 def group_adjacent_text(results, threshold_x=10, threshold_y=10, filter_confidence=0.5):
