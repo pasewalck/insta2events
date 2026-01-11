@@ -25,7 +25,7 @@ class PostTracker:
         image_paths = []
         for filename in os.listdir(self.directory()):
             if filename.endswith(('.png', '.jpg', '.webp')):
-                image_paths.pop(os.path.join(self.directory(), filename))
+                image_paths.append(os.path.join(self.directory(), filename))
         return image_paths
 
     def caption(self):
