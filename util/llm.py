@@ -6,7 +6,8 @@ from ollama import chat
 from pydantic import BaseModel
 
 from tracker import PostTracker
-from util.config import MODEL_LARGE, MODEL_SMALL, PROMPT_PARSE_FILE, INTERPRETER_USE_OCR, PROMPT_VALUE_FILE
+from util.config import MODEL_LARGE, MODEL_SMALL, PROMPT_PARSE_FILE, INTERPRETER_USE_OCR, PROMPT_VALUE_FILE, \
+    LLM_PASS_IMAGES_DIRECTLY, PROMPT_PARSE_VISION_FILE
 from util.files_operations import load_file
 
 
@@ -36,11 +37,14 @@ class EventEval(BaseModel):
     confidence: Literal["Very High", "High", "Ok", "Low"]
 
 
-def ask(message, large_model, model):
+def ask(message, large_model, model, images=None):
+    if images is None:
+        images = []
     messages = [{"role": "user", "content": message}]
     response = chat(
         model=MODEL_LARGE if large_model else MODEL_SMALL,
         messages=messages,
+        images=images,
         format=model,
     )
     response_content = response.message.content
@@ -53,7 +57,7 @@ def load_ai_prompt(file_path):
 
 
 def llm_parse_events(post: PostTracker):
-    prompt_parse = load_ai_prompt(PROMPT_PARSE_FILE)
+    prompt_parse = load_ai_prompt(PROMPT_PARSE_VISION_FILE if LLM_PASS_IMAGES_DIRECTLY else PROMPT_PARSE_FILE)
     return json.loads(ask(prompt_parse.replace(
         "{input}", post.caption()
     ).replace(
@@ -67,7 +71,7 @@ def llm_parse_events(post: PostTracker):
         "{owner_name}", post.account_details.name)
     .replace(
         "{owner_bio}", post.account_details.bio
-    ), True, Events.model_json_schema()))["events"]
+    ), True, Events.model_json_schema(), images=post.get_image_paths() if LLM_PASS_IMAGES_DIRECTLY else None))["events"]
 
 
 def llm_classify(post: PostTracker, large_model):
