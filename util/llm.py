@@ -11,7 +11,7 @@ from util.files_operations import load_file
 
 
 class Location(BaseModel):
-    type: Literal['Hybrid', 'Online', 'Offline']
+    type: Literal['Hybrid', 'Online', 'Offline', 'Unknown']
     offline_address: str | None
     online_link: str | None
 
