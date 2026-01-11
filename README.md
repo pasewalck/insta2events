@@ -45,11 +45,13 @@ SCRAPE_ACCOUNTS=downloadme,alsodownloadme
 SCRAPE_HASHTAGS=downloadme,alsodownloadme
 ```
 
-Decide what LLMs to use. Download these with Ollama and define them in environment variables. The default values are:
+Decide what large-(vision)-language models to use. Download these with Ollama and define them in environment variables.
+The default values are:
 
 ```
 MODEL_LARGE=gemma3:4b
 MODEL_SMALL=deepseek-r1:8b
+MODEL_VISION=llama3.2-vision
 ```
 
 Optionally set up a login username and session file. See the [Instaloader Docs](https://instaloader.github.io/) for more
@@ -59,6 +61,9 @@ details on acquiring this session file. See the following example:
 LOGIN_SESSION_FILE=session/session-youraccount
 LOGIN_USERNAME=youraccount
 ```
+
+Decide if you want to pass images directly to ollama alongside the caption instead of passing ocr results. To
+do so set: `LLM_PASS_IMAGES_DIRECTLY=True` (I recommend a GPU if you want to do so!)
 
 For further environment variables and config, see the `config.py` file.
 
