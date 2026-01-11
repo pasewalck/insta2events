@@ -67,17 +67,6 @@ do so set: `LLM_PASS_IMAGES_DIRECTLY=True` (I recommend a GPU if you want to do 
 
 For further environment variables and config, see the `config.py` file.
 
-### Findings on Models
-
-Based on limited testing, I have concluded that model sizes with parameter sizes of around **8b are the absolute minimum
-required to obtain somewhat reliable results** for event data parsing. **More intelligent models with more than 15 or
-30
-significantly improves the
-results** and should also allow for the adjustment of prompts with more details and compensations.
-
-For classification however already smaller models such as `gemma3:4b` seem to be okay, however the basic classifier
-proves to be very effective as well and I would actually recommend it over the llm based classifier.
-
 ### Usage
 
 Scrape all content:
@@ -96,6 +85,20 @@ Classify all posts (decides if post has data on events/dates):
 Run LLMs on content (Specify whether to use OCR results in environment variables):
 
 ```uv run interpreter.py```
+
+### Findings on Models
+
+TL;DR, more capable models are going to significantly improve results for event parsing.
+
+Based on limited testing, I have concluded that model sizes with parameter sizes of around **8b are the absolute minimum
+required to obtain somewhat reliable results** for event data parsing. **More capable models with more than 15b or
+30b parameter significantly improves the results** and should also allow for the adjustment of prompts with more details
+and compensations.
+
+For classification however already smaller models such as `gemma3:4b` seem to be okay, however the basic classifier
+proves to be very effective as well and I would actually recommend it over the llm based classifier.
+
+Due to me not owning a GPU I can only suggest options!
 
 ## License and Warranty
 
