@@ -1,16 +1,46 @@
 import datetime
+import json
+from typing import Literal
 
 from ollama import chat
+from pydantic import BaseModel
 
-from util.config import MODEL_LARGE, MODEL_SMALL
+from tracker import PostTracker
+from util.config import MODEL_LARGE, MODEL_SMALL, PROMPT_PARSE_FILE, INTERPRETER_USE_OCR, PROMPT_VALUE_FILE
 from util.files_operations import load_file
 
 
-def ask(message, large_model):
+class Location(BaseModel):
+    type: Literal['Hybrid', 'Online', 'Offline']
+    offline_address: str | None
+    online_link: str | None
+
+
+class Event(BaseModel):
+    title: str
+    type: Literal['Demo', 'Konzert', 'Konferenz', 'Camp', 'Aktion', 'Festival', 'Diskussion']
+    location: Location
+    start_datetime: datetime.datetime
+    end_datetime: datetime.datetime
+    description: str
+    link: str
+
+
+class Events(BaseModel):
+    events: list[Event]
+
+
+class EventEval(BaseModel):
+    is_event: bool
+    confidence: Literal["Very High", "High", "Ok", "Low"]
+
+
+def ask(message, large_model, model):
     messages = [{"role": "user", "content": message}]
     response = chat(
         model=MODEL_LARGE if large_model else MODEL_SMALL,
         messages=messages,
+        format=model,
     )
     response_content = response.message.content
     messages.append({"role": "assistant", "content": response_content})
@@ -19,3 +49,31 @@ def ask(message, large_model):
 
 def load_ai_prompt(file_path):
     return load_file(file_path).replace("{year}", f"{datetime.datetime.now().year}")
+
+
+def llm_parse_events(post: PostTracker):
+    prompt_parse = load_ai_prompt(PROMPT_PARSE_FILE)
+    return json.loads(ask(prompt_parse.replace(
+        "{input}", post.caption()
+    ).replace(
+        "{input_ocr}",
+        post.ocr_output()
+        if INTERPRETER_USE_OCR
+        else "None"
+    ).replace(
+        "{owner_link}", post.account_details.link
+    ).replace(
+        "{owner_name}", post.account_details.name)
+    .replace(
+        "{owner_bio}", post.account_details.bio
+    ), True, Events.model_json_schema()))["events"]
+
+
+def llm_classify(post: PostTracker):
+    classifier_prompt = load_ai_prompt(PROMPT_VALUE_FILE)
+    return json.loads(ask(classifier_prompt.replace("{input}", post.caption()).replace(
+        "{input_ocr}",
+        post.ocr_output()
+        if INTERPRETER_USE_OCR
+        else "None"
+    ), False, EventEval.model_json_schema()))
