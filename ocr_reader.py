@@ -11,20 +11,17 @@ from util.files_operations import write_json
 def run_ocr(post: PostTracker, reader: easyocr.Reader):
     output_raw = []
     output_cleaned = []
-    for filename in os.listdir(post.directory()):
-        if filename.endswith(('.png', '.jpg', '.webp')):
-            image_path = os.path.join(post.directory(), filename)
-
-            try:
-                image = cv2.imread(image_path)
-                raw_result = reader.readtext(image)
-                cleaned_result = group_adjacent_text(raw_result)
-                output_raw.append(raw_result)
-                output_cleaned.append(cleaned_result)
-            except FileNotFoundError:
-                print("Error: The image file was not found.")
-            except Exception as e:
-                print(f"An unexpected error occurred: {e}")
+    for image_path in post.get_image_paths():
+        try:
+            image = cv2.imread(image_path)
+            result = reader.readtext(image)
+            cleaned_result = group_adjacent_text(result)
+            output_raw.append(result)
+            output_cleaned.append(cleaned_result)
+        except FileNotFoundError:
+            print("Error: The image file was not found.")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
     print(f"For {post.media_id} OCR Results: \n Raw: {raw_result} \n Cleaned: {output_cleaned}")
     write_json(os.path.join(post.directory(), OCR_OUTPUT_FILE_NAME), output_cleaned)
