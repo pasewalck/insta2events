@@ -1,7 +1,8 @@
 import os
 from typing import ContextManager
 
-from util.config import DATA_PARENT_FOLDER, SYNC_FILE_NAME
+from util.config import DATA_PARENT_FOLDER, SYNC_FILE_NAME, POSTS_FOLDER_NAME, OCR_OUTPUT_FILE_NAME
+from util.files_operations import load_file
 from util.use_pickel import use_pickel
 
 
@@ -16,6 +17,15 @@ class PostTracker:
         self.classified_as_event = False
         self.account_details: AccountDetails = account_details
         self.sources = [source]
+
+    def directory(self):
+        return os.path.join(DATA_PARENT_FOLDER, POSTS_FOLDER_NAME, f"{self.media_id}")
+
+    def caption(self):
+        return load_file(os.path.join(self.directory(), "data.txt"), None)
+
+    def ocr_output(self):
+        return load_file(os.path.join(self.directory(), OCR_OUTPUT_FILE_NAME), "None")
 
 
 class AccountDetails:
