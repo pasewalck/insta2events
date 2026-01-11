@@ -48,8 +48,8 @@ SCRAPE_HASHTAGS=downloadme,alsodownloadme
 Decide what LLMs to use. Download these with Ollama and define them in environment variables. The default values are:
 
 ```
-MODEL_LARGE=qwen2.5
-MODEL_SMALL=qwen2.5:3b
+MODEL_LARGE=gemma3:4b
+MODEL_SMALL=deepseek-r1:8b
 ```
 
 Optionally set up a login username and session file. See the [Instaloader Docs](https://instaloader.github.io/) for more
