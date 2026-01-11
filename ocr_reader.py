@@ -23,7 +23,7 @@ def run_ocr(post: PostTracker, reader: easyocr.Reader):
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
 
-    print(f"For {post.media_id} OCR Results: \n Raw: {raw_result} \n Cleaned: {output_cleaned}")
+    print(f"For {post.media_id} OCR Results: \n Cleaned: {output_cleaned}")
     write_json(os.path.join(post.directory(), OCR_OUTPUT_FILE_NAME), output_cleaned)
 
 
