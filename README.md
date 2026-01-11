@@ -78,7 +78,8 @@ Scrape all content:
 
 ```uv run scraper.py```
 
-(Optionally) Run OCR reader:
+(Optionally) Run OCR reader (Can optionally be run after classifier and with `OCR_ONLY_ON_AS_EVENT_CLASSIFIED` set to
+true to only run ocr on "promising" posts):
 
 ```uv run ocr_reader.py```
 

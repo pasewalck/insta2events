@@ -4,7 +4,7 @@ import cv2
 import easyocr
 
 from tracker import use_tracker, PostTracker
-from util.config import OCR_OUTPUT_FILE_NAME
+from util.config import OCR_OUTPUT_FILE_NAME, OCR_ONLY_ON_AS_EVENT_CLASSIFIED
 from util.files_operations import write_json
 
 
@@ -81,7 +81,7 @@ def main():
     with use_tracker() as sync_tracker:
 
         for post in sync_tracker.posts.values():
-            if not post.ocr_ran:
+            if not post.ocr_ran and (not OCR_ONLY_ON_AS_EVENT_CLASSIFIED or post.classified_as_event):
                 run_ocr(post, reader)
                 post.ocr_ran = True
 
