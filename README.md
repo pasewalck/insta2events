@@ -62,6 +62,16 @@ LOGIN_USERNAME=youraccount
 
 For further environment variables and config, see the `config.py` file.
 
+### Findings on Models
+
+Based on limited testing, I have concluded that model sizes with parameter sizes of around 8b are the absolute minimum
+required to obtain somewhat reliable results for event data analysis. A more intelligent model with more than 15 or 30
+significantly improves the
+results and should also allow for the adjustment of prompts with more details and compensations.
+
+For classification however already smaller models such as `gemma3:4b` seem to be okay, however the basic classifier
+proves to be very effective as well and I would actually recommend it over the llm based classifier.
+
 ### Usage
 
 Scrape all content:
