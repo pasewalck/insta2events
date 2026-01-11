@@ -1,5 +1,5 @@
-The task is to find one or more dates in an input.
-If no year is found, the date is in the current year: {year}. If there is not enough information, do not return any dates.
+The task is to find one or more events in an instagram post.
+If no year is found, the date is in the current year: {year}. If there is not enough information, do not return any events.
 
 -- Start of inputs to be evaluated (caption) --
 
