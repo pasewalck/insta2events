@@ -38,13 +38,13 @@ class EventEval(BaseModel):
 
 
 def ask(message, large_model, model, images=None):
-    if images is None:
-        images = []
-    messages = [{"role": "user", "content": message}]
+    if len(images) <= 0:
+        images = None
+    messages = [{"role": "user", "content": message, "images": images}] if images is not None else [
+        {"role": "user", "content": message}]
     response = chat(
         model=MODEL_LARGE if large_model else MODEL_SMALL,
         messages=messages,
-        images=images,
         format=model,
     )
     response_content = response.message.content
