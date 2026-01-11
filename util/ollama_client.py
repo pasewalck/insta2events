@@ -37,15 +37,15 @@ class EventEval(BaseModel):
     confidence: Literal["Very High", "High", "Ok", "Low"]
 
 
-def ask(message, large_model, model, images=None):
-    if len(images) <= 0:
+def ask(message, large_model, format_json=None, images=None):
+    if images is not None and len(images) <= 0:
         images = None
     messages = [{"role": "user", "content": message, "images": images}] if images is not None else [
         {"role": "user", "content": message}]
     response = chat(
         model=(MODEL_LARGE if large_model else MODEL_SMALL) if images is None else MODEL_VISION,
         messages=messages,
-        format=model,
+        format=format_json,
     )
     response_content = response.message.content
     messages.append({"role": "assistant", "content": response_content})
