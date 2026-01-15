@@ -3,7 +3,7 @@ Wenn kein Jahr gefunden wird, ist das Datum das aktuelle Jahr: {year}. Wenn nich
 
 Caption:
 
-{caption}
+{input}
 
 Zusätzliche Informationen über das Konto hinter dem Beitrag:
 Name: {owner_name}

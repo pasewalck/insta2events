@@ -3,7 +3,7 @@ If no year is found, the date is in the current year: {year}. If there is not en
 
 Caption:
 
-{caption}
+{input}
 
 Additional information about the account behind the post:
 Name: {owner_name}
