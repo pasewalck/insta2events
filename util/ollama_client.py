@@ -21,7 +21,7 @@ class Event(BaseModel):
     title: str
     type: Literal[
         'Demo', 'Konzert', 'Konferenz', 'Camp', 'Aktion', 'Festival', 'Diskussion', 'Workshop', 'Jahrestag', 'Anderes']
-    location: Location
+    location: Location | None
     start_datetime: datetime.datetime
     end_datetime: datetime.datetime
     description: str
