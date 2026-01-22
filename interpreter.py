@@ -1,8 +1,8 @@
 import os
 
 from tracker import use_tracker, PostTracker
-from util.config import LLM_OUTPUT_FILE_NAME, RERUN_INTERPRETER
-from util.files_operations import write_json
+from util.config import LLM_OUTPUT_FILE_NAME, RERUN_INTERPRETER, LLM_PROMPT_OUTPUT_FILE_NAME
+from util.files_operations import write_json, write_file
 from util.ollama_client import llm_parse_events
 
 
@@ -16,9 +16,13 @@ def main():
 
 
 def run_interpreter(post: PostTracker):
-    result = llm_parse_events(post)
-    print(f"Parsed: {result}" if result != "[]" else f"Parse failed!")
-    write_json(os.path.join(post.directory(), LLM_OUTPUT_FILE_NAME), result)
+    result, prompt = llm_parse_events(post)
+    if result is not None:
+        print(f"{len(result['events'])} events parsed!")
+        write_json(os.path.join(post.directory(), LLM_OUTPUT_FILE_NAME), result)
+    else:
+        print("No event parsed!")
+    write_file(os.path.join(post.directory(), LLM_PROMPT_OUTPUT_FILE_NAME), prompt)
 
 
 if __name__ == "__main__":

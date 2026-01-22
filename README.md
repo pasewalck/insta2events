@@ -49,9 +49,8 @@ Decide what large-(vision)-language models to use. Download these with Ollama an
 The default values are:
 
 ```
-MODEL_SMALL=gemma3:4b
-MODEL_LARGE=deepseek-r1:8b
-MODEL_VISION=llama3.2-vision
+MODEL_CLASSIFIER=gemma3:4b
+MODEL_INTERPRETER=llama3.2-vision
 ```
 
 Optionally set up a login username and session file. See the [Instaloader Docs](https://instaloader.github.io/) for more
@@ -73,16 +72,11 @@ Scrape all content:
 
 ```uv run scraper.py```
 
-(Optionally) Run OCR reader (Can optionally be run after classifier and with `OCR_ONLY_ON_AS_EVENT_CLASSIFIED` set to
-true to only run ocr on "promising" posts):
-
-```uv run ocr_reader.py```
-
 Classify all posts (decides if post has data on events/dates):
 
 ```uv run classifier.py```
 
-Run LLMs on content (Specify whether to use OCR results in environment variables):
+Run LLMs on content:
 
 ```uv run interpreter.py```
 
