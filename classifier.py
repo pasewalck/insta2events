@@ -23,10 +23,9 @@ class ClassifierPassResult:
         self.mode = mode
 
     def run(self, post: PostTracker):
-        if self.mode == "llm-small" or self.mode == "llm-large":
-            llm_eval = llm_classify(post, self.mode == "llm-large")
-            self.is_event = llm_eval["is_event"]
-            self.confidence = llm_eval["confidence"]
+        if self.mode == "llm":
+            self.is_event = llm_classify(post)
+            self.confidence = "Ok"
         elif self.mode == "basic":
             self.confidence = "Ok"
             self.is_event = classic_classifier(post)
@@ -59,16 +58,13 @@ class ClassifierResult:
         return self
 
 
-def classifier(post) -> ClassifierResult:
+def classifier(post) -> ClassifierResult | None:
     if INTERPRETER_CLASSIFIER_MODE == "basic":
         return ClassifierResult([ClassifierPassResult("basic")]).run(post)
     elif INTERPRETER_CLASSIFIER_MODE == "llm":
-        return ClassifierResult([ClassifierPassResult("llm-small")]).run(post)
+        return ClassifierResult([ClassifierPassResult("llm")]).run(post)
     elif INTERPRETER_CLASSIFIER_MODE == "stacked":
-        return ClassifierResult([ClassifierPassResult("basic"), ClassifierPassResult("llm-small")]).run(post)
-    elif INTERPRETER_CLASSIFIER_MODE == "stacked-maxed":
-        return ClassifierResult([ClassifierPassResult("basic"), ClassifierPassResult("llm-small"),
-                                 ClassifierPassResult("llm-large")]).run(post)
+        return ClassifierResult([ClassifierPassResult("basic"), ClassifierPassResult("llm")]).run(post)
     else:
         throw_error("No Interpreter Mode")
 

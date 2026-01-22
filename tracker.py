@@ -1,7 +1,7 @@
 import os
 from typing import ContextManager
 
-from util.config import DATA_PARENT_FOLDER, SYNC_FILE_NAME, POSTS_FOLDER_NAME, OCR_OUTPUT_FILE_NAME
+from util.config import DATA_PARENT_FOLDER, SYNC_FILE_NAME, POSTS_FOLDER_NAME
 from util.files_operations import load_file
 from util.use_pickel import use_pickel
 
@@ -11,7 +11,6 @@ class PostTracker:
         self.media_id = media_id
         self.date = date
         self.photos_downloaded = photos_downloaded
-        self.ocr_ran = False
         self.interpreted = False
         self.classified = False
         self.classified_as_event = False
@@ -21,18 +20,17 @@ class PostTracker:
     def directory(self):
         return os.path.join(DATA_PARENT_FOLDER, POSTS_FOLDER_NAME, f"{self.media_id}")
 
-    def get_image_paths(self):
+    def get_image_paths(self, limit=100):
         image_paths = []
+        i = 0
         for filename in os.listdir(self.directory()):
-            if filename.endswith(('.png', '.jpg', '.webp')):
+            if filename.endswith(('.png', '.jpg', '.webp')) and i < limit:
                 image_paths.append(os.path.join(self.directory(), filename))
+                i += 1
         return image_paths
 
     def caption(self):
         return load_file(os.path.join(self.directory(), "data.txt"), None)
-
-    def ocr_output(self):
-        return load_file(os.path.join(self.directory(), OCR_OUTPUT_FILE_NAME), "None")
 
 
 class AccountDetails:

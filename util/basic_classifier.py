@@ -1,7 +1,5 @@
 import re
 
-from util.config import CLASSIFIER_USE_OCR
-
 english_keywords = [
     'event', 'festival', 'concert', 'party', 'celebration',
     'gathering', 'exhibition', 'launch', 'ceremony', 'workshop',
@@ -27,8 +25,6 @@ date_pattern = r'/\d{1,2}[.\-\/][ ]?\d{1,2}[.\-\/]/'
 
 def classic_classifier(post):
     text = post.caption()
-    if CLASSIFIER_USE_OCR:
-        text += post.ocr_output()
     contains = False
     for word in (
             english_keywords + german_keywords + english_weekdays + german_weekdays + german_months + english_months):
