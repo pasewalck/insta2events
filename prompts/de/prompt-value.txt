@@ -4,6 +4,8 @@ Ihre Aufgabe ist es, zu beurteilen, ob die angegebene Eingabe Informationen zu e
 
 Und das Ergebnis auf der Grundlage eines detaillierten Schemas auszugeben. Gebe nur "True" oder "False" aus. Deine Antwort darf keinen zusätzlichen Parameter, Text, Kommentare oder Konversationsphrasen enthalten.
 
+Gebe nur ein positives Ergebnis ("True") aus, wenn ein Datum gegeben ist. Angaben wie "Morgen" und "Heute" reichen nicht aus.
+
 Caption des Instagram-Beitrag:
 
 {input}
