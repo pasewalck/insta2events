@@ -10,4 +10,5 @@ dependencies = [
     "ollama==0.4.4",
     "dotenv>=0.9.9",
     "supervision>=0.27.0",
+    "caldav>=2.2.3",
 ]
