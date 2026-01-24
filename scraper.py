@@ -51,7 +51,9 @@ def download(instaloader_instance: Instaloader, mode, target_username_or_hashtag
             sync_tracker.posts[post.mediaid].sources.append(identifier)
         else:
             print(post.owner_profile.external_url)
-            sync_tracker.posts[post.mediaid] = PostTracker(post.mediaid, post.date, DOWNLOAD_PHOTOS, identifier,
+            sync_tracker.posts[post.mediaid] = PostTracker(post.mediaid, post.shortcode, post.likes, post.date,
+                                                           DOWNLOAD_PHOTOS,
+                                                           identifier,
                                                            account_details)
 
         posts_count += 1

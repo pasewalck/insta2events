@@ -7,13 +7,17 @@ from util.use_pickel import use_pickel
 
 
 class PostTracker:
-    def __init__(self, media_id, date, photos_downloaded, source, account_details):
+    def __init__(self, media_id, shortcode, likes, date, photos_downloaded, source, account_details):
         self.media_id = media_id
+        self.shortcode = shortcode
         self.date = date
         self.photos_downloaded = photos_downloaded
         self.interpreted = False
+        self.likes = likes
         self.classified = False
+        self.caldav_pushed = False
         self.classified_as_event = False
+        self.interpretation_details: [InterpretationDetails] = []
         self.account_details: AccountDetails = account_details
         self.sources = [source]
 
@@ -31,6 +35,12 @@ class PostTracker:
 
     def caption(self):
         return load_file(os.path.join(self.directory(), "data.txt"), None)
+
+
+class InterpretationDetails:
+    def __init__(self, name, start_date):
+        self.name = name
+        self.start_date = start_date
 
 
 class AccountDetails:
