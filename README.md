@@ -9,7 +9,7 @@ section. We also direct you to our **License, Warranty and Disclaimer** sections
 This project was designed for use in conjunction with the
 project [Bewegungskalender](https://0xacab.org/aktivistek/bewegungskalender).
 
-Currently working in [dev-simple](https://github.com/pasewalck/insta2events/tree/dev-simple) on improvements and reworkings to this project.
+**Currently working in [dev-simple](https://github.com/pasewalck/insta2events/tree/dev-simple) on improvements and reworkings to this project.**
 
 ## Implemented Specs & Features
 
