@@ -28,7 +28,7 @@ english_months = ["january", "february", "march", "april", "may", "june", "july"
                   "november", "december"]
 german_months = ["januar", "februar", "märz", "april", "mai", "juni", "juli", "august", "september", "oktober",
                  "november", "dezember"]
-date_pattern = r'/\d{1,2}[.\-\/][ ]?\d{1,2}[.\-\/]/'
+date_pattern = r'\d{1,2}[.\-\/][ ]?\d{1,2}[.\-\/]'
 
 
 def classic_classifier(post: PostTracker):
