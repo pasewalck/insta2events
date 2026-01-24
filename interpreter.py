@@ -8,11 +8,16 @@ from util.ollama_client import llm_parse_events
 
 def main():
     with use_tracker() as sync_tracker:
-
+        targets = []
         for post in sync_tracker.posts.values():
             if (not post.interpreted or RERUN_INTERPRETER) and post.classified_as_event:
-                run_interpreter(post)
-                post.interpreted = True
+                targets.append(post)
+        count = 0
+        for post in targets:
+            print(f"Post {count} / {len(targets)}")
+            run_interpreter(post)
+            post.interpreted = True
+            count += 1
 
 
 def run_interpreter(post: PostTracker):
