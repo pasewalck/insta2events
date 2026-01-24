@@ -26,6 +26,13 @@ This software heavily relies on the amazing work of the maintainers and contribu
 - [Ollama Python Library](https://github.com/ollama/ollama-python)
 - [As well as Ollama](https://ollama.com/download)
 
+Prompt designs are based on following research:
+
+- (General
+  Advice) https://medium.com/data-science-collective/master-advanced-prompting-techniques-to-optimize-llm-application-performance-a192c60472c5
+- (Single-Task vs. Multi-Task Prompting) https://eugenevyborov.substack.com/p/single-task-vs-multi-task-prompting
+- (Single-Task vs. Multi-Task Prompting) https://www.mdpi.com/2079-9292/13/23/4712
+
 We also refer you to the acknowledgment sections in the mentioned software repositories for further information.
 
 ## Setup and Usage
