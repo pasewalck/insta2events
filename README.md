@@ -9,7 +9,7 @@ section. We also direct you to our **License, Warranty and Disclaimer** sections
 This project was designed for use in conjunction with the
 project [Bewegungskalender](https://0xacab.org/aktivistek/bewegungskalender).
 
-See [legacy](https://github.com/pasewalck/insta2events/tree/legacy) for old version based on a classic ocr reader
+See [legacy](https://github.com/pasewalck/insta2events/tree/legacy) for old version based on a classic OCR reader.
 
 ## Implemented Specs & Features
 
