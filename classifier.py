@@ -52,9 +52,9 @@ class ClassifierResult:
             self.is_event = _.is_event
             print(f" Classification for {post.media_id} with {_.mode} is: {_.is_event} with confidence: {_.confidence}")
             if not _.is_event:
-                print(f"Final classification for {post.media_id}: {post.classified_as_event}")
+                print(f"Final classification for {post.media_id}: {self.is_event}")
                 return self
-        print(f"Final classification for {post.media_id}: {post.classified_as_event}")
+        print(f"Final classification for {post.media_id}: {self.is_event}")
         return self
 
 
