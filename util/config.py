@@ -26,3 +26,11 @@ SAVE_PROMPT = os.getenv("SAVE_PROMPT", "False") == "True"
 RERUN_INTERPRETER = os.getenv("RERUN_INTERPRETER", "False") == "True"
 RERUN_CLASSIFIER = os.getenv("RERUN_CLASSIFIER", "False") == "True"
 SYNC_SINCE = os.getenv("SYNC_SINCE", datetime(2025, 12, 1).isoformat())
+
+CALDAV_URL = os.getenv("CALDAV_URL")
+CALDAV_USERNAME = os.getenv("CALDAV_USERNAME")
+CALDAV_PASSWORD = os.getenv("CALDAV_PASSWORD")
+CALDAV_CALENDAR = os.getenv("CALDAV_CALENDAR")
+OLLAMA_KEY = os.getenv("OLLAMA_KEY")
+
+DESCRIPTION_FOOTER = os.getenv("DESCRIPTION_FOOTER", "Sourced from Instagram Post: {post_link}")
