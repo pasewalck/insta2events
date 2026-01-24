@@ -17,6 +17,5 @@ class use_pickel:
         return self.data
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        if exc_type is None:
-            with open(self.file_path, 'wb') as f:
-                pickle.dump(self.data, f)
+        with open(self.file_path, 'wb') as f:
+            pickle.dump(self.data, f)
