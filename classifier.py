@@ -11,11 +11,16 @@ from util.ollama_client import llm_classify
 
 def main():
     with use_tracker() as sync_tracker:
-
+        targets = []
         for post in sync_tracker.posts.values():
             if not post.classified or RERUN_CLASSIFIER:
-                post.classified_as_event = classifier(post).is_event
-                post.classified = True
+                targets.append(post)
+        count = 0
+        for post in targets:
+            print(f"Post {count} / {len(targets)}")
+            post.classified_as_event = classifier(post).is_event
+            post.classified = True
+            count += 1
 
 
 class ClassifierPassResult:
