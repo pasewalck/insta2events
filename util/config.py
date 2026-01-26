@@ -26,6 +26,7 @@ SAVE_PROMPT = os.getenv("SAVE_PROMPT", "False") == "True"
 RERUN_INTERPRETER = os.getenv("RERUN_INTERPRETER", "False") == "True"
 RERUN_CLASSIFIER = os.getenv("RERUN_CLASSIFIER", "False") == "True"
 SYNC_SINCE = os.getenv("SYNC_SINCE", datetime(2025, 12, 1).isoformat())
+USE_IMGINN_LINK = os.getenv("USE_IMGINN_LINK", "False") == "True"
 
 CALDAV_URL = os.getenv("CALDAV_URL")
 CALDAV_USERNAME = os.getenv("CALDAV_USERNAME")
