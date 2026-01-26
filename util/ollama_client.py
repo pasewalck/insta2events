@@ -77,7 +77,7 @@ def llm_parse_events(post: PostTracker, max_attempts: int = 2, attempt: int = 0)
         return json.loads(parsed), prompt
     except (ValidationError, ResponseError):
         if attempt < max_attempts:
-            llm_parse_events(post, max_attempts, attempt + 1)
+            return llm_parse_events(post, max_attempts, attempt + 1)
         else:
             return [], prompt
 
