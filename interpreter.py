@@ -15,10 +15,10 @@ def main():
                 targets.append(post)
         count = 0
         for post in targets:
+            count += 1
             print(f"Post {count} / {len(targets)}")
             run_interpreter(post)
             post.interpreted = True
-            count += 1
 
 
 def run_interpreter(post: PostTracker):

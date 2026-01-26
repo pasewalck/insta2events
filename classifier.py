@@ -17,10 +17,10 @@ def main():
                 targets.append(post)
         count = 0
         for post in targets:
+            count += 1
             print(f"Post {count} / {len(targets)}")
             post.classified_as_event = classifier(post).is_event
             post.classified = True
-            count += 1
 
 
 class ClassifierPassResult:
