@@ -11,4 +11,5 @@ dependencies = [
     "dotenv>=0.9.9",
     "supervision>=0.27.0",
     "caldav>=2.2.3",
+    "retry>=0.9.2",
 ]
