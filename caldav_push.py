@@ -6,7 +6,7 @@ from caldav.davclient import DAVClient
 
 from tracker import use_tracker, PostTracker
 from util.config import LLM_OUTPUT_FILE_NAME, CALDAV_CALENDAR, CALDAV_USERNAME, CALDAV_PASSWORD, CALDAV_URL, \
-    DESCRIPTION_FOOTER
+    DESCRIPTION_FOOTER, USE_IMGINN_LINK
 from util.use_json import use_json
 
 
@@ -45,7 +45,9 @@ def push_events(calendar, post: PostTracker):
                 description_array = [event_json["description"]]
                 if DESCRIPTION_FOOTER is not None:
                     description_array.append(DESCRIPTION_FOOTER.replace(
-                        "{post_link}", f"https://instagram.com/p/{post.shortcode}"))
+                        "{post_link}",
+                        f"https://instagram.com/p/{post.shortcode}" if not USE_IMGINN_LINK else f"https://imginn.com/p/{post.shortcode}").replace(
+                        "{post_shortcode}", post.shortcode))
                 if event_json["link"] is not None:
                     description_array.append(event_json["link"])
 
