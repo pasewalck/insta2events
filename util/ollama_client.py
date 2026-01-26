@@ -37,19 +37,22 @@ client = Client(
 
 
 def ask(message, model, images=None, temperature: int = 0):
-    if images is not None and len(images) <= 0:
-        images = None
-    messages = [{"role": "user", "content": message, "images": images}] if images is not None else [
-        {"role": "user", "content": message}]
+    try:
+        if images is not None and len(images) <= 0:
+            images = None
+        messages = [{"role": "user", "content": message, "images": images}] if images is not None else [
+            {"role": "user", "content": message}]
 
-    response = client.chat(
-        model=model,
-        messages=messages,
-        options={'temperature': temperature},
-    )
-    response_content = response.message.content
-    messages.append({"role": "assistant", "content": response_content})
-    return response_content
+        response = client.chat(
+            model=model,
+            messages=messages,
+            options={'temperature': temperature},
+        )
+        response_content = response.message.content
+        messages.append({"role": "assistant", "content": response_content})
+        return response_content
+    except ResponseError:
+        return ask(message, model, images, temperature)
 
 
 def load_ai_prompt(file_path):
