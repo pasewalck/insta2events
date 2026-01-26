@@ -4,12 +4,11 @@ from tracker import PostTracker
 
 english_keywords = [
     'event', 'festival', 'concert', 'party', 'celebration',
-    'gathering', 'exhibition', 'launch', 'ceremony', 'workshop',
-    'strike']
+    'gathering', 'exhibition', 'launch', 'ceremony', 'workshop', 'register', 'strike']
 german_keywords = [
     'ereignis', 'festival', 'konzert', 'party', 'feier',
     'zusammenkunft', 'ausstellung', 'einführung', 'zeremonie', 'workshop',
-    'konferenz', 'treffen', 'gala', 'eröffnung', 'show', 'aktion', 'streik'
+    'konferenz', 'treffen', 'gala', 'eröffnung', 'show', 'aktion', 'streik', 'webinar', 'anmeldelink', 'anmeldung'
 ]
 
 english_keywords_negative = [
