@@ -4,7 +4,7 @@ from typing import Literal
 
 from ollama import Client, ResponseError
 from pydantic import BaseModel, ValidationError
-from torch.testing._internal.common_utils import retry
+from retry import retry
 
 from tracker import PostTracker
 from util.config import PROMPT_INTERPRETER_FILE, PROMPT_CLASSIFY_FILE, \
