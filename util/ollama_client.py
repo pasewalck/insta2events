@@ -4,6 +4,7 @@ from typing import Literal
 
 from ollama import Client, ResponseError
 from pydantic import BaseModel, ValidationError
+from torch.testing._internal.common_utils import retry
 
 from tracker import PostTracker
 from util.config import PROMPT_INTERPRETER_FILE, PROMPT_CLASSIFY_FILE, \
@@ -36,23 +37,21 @@ client = Client(
 ) if OLLAMA_KEY else Client()
 
 
+@retry(ResponseError, tries=2, delay=2)
 def ask(message, model, images=None, temperature: int = 0):
-    try:
-        if images is not None and len(images) <= 0:
-            images = None
-        messages = [{"role": "user", "content": message, "images": images}] if images is not None else [
-            {"role": "user", "content": message}]
+    if images is not None and len(images) <= 0:
+        images = None
+    messages = [{"role": "user", "content": message, "images": images}] if images is not None else [
+        {"role": "user", "content": message}]
 
-        response = client.chat(
-            model=model,
-            messages=messages,
-            options={'temperature': temperature},
-        )
-        response_content = response.message.content
-        messages.append({"role": "assistant", "content": response_content})
-        return response_content
-    except ResponseError:
-        return ask(message, model, images, temperature)
+    response = client.chat(
+        model=model,
+        messages=messages,
+        options={'temperature': temperature},
+    )
+    response_content = response.message.content
+    messages.append({"role": "assistant", "content": response_content})
+    return response_content
 
 
 def load_ai_prompt(file_path):
