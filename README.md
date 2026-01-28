@@ -3,7 +3,7 @@
 This project implements a combination of existing software to scrape, analyze, and interpret Instagram posts and filter
 out any events found.
 
-This project heavily relies on Instaloader, EasyOCR, and Ollama. More details can be found in the **Acknowledgments**
+This project heavily relies on Instaloader and Ollama. More details can be found in the **Acknowledgments**
 section. We also direct you to our **License, Warranty and Disclaimer** sections at the bottom of this page.
 
 This project was designed for use in conjunction with the
@@ -14,8 +14,7 @@ See [legacy](https://github.com/pasewalck/insta2events/tree/legacy) for old vers
 ## Implemented Specs & Features
 
 - Scrape specified Instagram accounts and hashtags.
-- Analyze images using OCR.
-- Run specified LLMs on the captions and, optionally, OCR output of scraped and analyzed content.
+- Run specified LLMs on the captions and images.
 - All steps of this process are saved in a `sync.pkl` file, and results are output to `.json` files in the corresponding
   posts directories.
 
@@ -24,7 +23,6 @@ See [legacy](https://github.com/pasewalck/insta2events/tree/legacy) for old vers
 This software heavily relies on the amazing work of the maintainers and contributors of the following projects:
 
 - [Instaloader](https://github.com/instaloader/instaloader)
-- [EasyOCR](https://github.com/JaidedAI/EasyOCR)
 - [Ollama Python Library](https://github.com/ollama/ollama-python)
 - [As well as Ollama](https://ollama.com/download)
 
