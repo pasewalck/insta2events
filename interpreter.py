@@ -16,7 +16,7 @@ def main():
         count = 0
         for post in targets:
             count += 1
-            print(f"Post {count} / {len(targets)}")
+            print(f"Post {count} / {len(targets)}: https://imginn.com/p/{post.shortcode}")
             run_interpreter(post)
             post.interpreted = True
 
