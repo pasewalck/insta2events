@@ -78,9 +78,11 @@ def main():
         print(f"Scraping everything since latest sync states!")
 
         for hashtag in hashtags:
-            download(l, instaloader.Hashtag, hashtag, sync_tracker)
+            if hashtag != "":
+                download(l, instaloader.Hashtag, hashtag, sync_tracker)
         for account_username in account_usernames:
-            download(l, instaloader.Profile, account_username, sync_tracker)
+            if account_username != "":
+                download(l, instaloader.Profile, account_username, sync_tracker)
 
         print(f"All new content was scraped. Updating sync state to: {until.strftime('%Y-%m-%d %H:%M:%S')}")
 
