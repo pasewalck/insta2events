@@ -38,40 +38,41 @@ def push_events(calendar, post: PostTracker):
     counter = 0
     duplicates_skipped = 0
     with use_json(os.path.join(post.directory(), LLM_OUTPUT_FILE_NAME)) as json:
-        for event_json in json["events"]:
-            if 'duplicate' in event_json and event_json['duplicate']:
-                duplicates_skipped += 1
-            else:
-                description_array = [event_json["description"]]
-                if DESCRIPTION_FOOTER is not None:
-                    description_array.append(DESCRIPTION_FOOTER.replace(
-                        "{post_link}",
-                        f"https://instagram.com/p/{post.shortcode}" if not USE_IMGINN_LINK else f"https://imginn.com/p/{post.shortcode}").replace(
-                        "{post_shortcode}", post.shortcode))
-                if event_json["link"] is not None:
-                    description_array.append(event_json["link"])
-
-                event = icalendar.Event()
-                event.add("summary", event_json["title"])
-                event.add("description", "\n\n".join(description_array))
-                event.add("url", event_json["link"])
-                event.add("location", location(event_json["location"]))
-
-                start_datetime = datetime.datetime.fromisoformat(event_json["start_datetime"])
-                end_datetime = datetime.datetime.fromisoformat(event_json["end_datetime"])
-
-                if start_datetime.time() == datetime.time(0, 0, 0):
-                    event.add("dtstart", start_datetime.date())
+        if "events" in json:
+            for event_json in json["events"]:
+                if 'duplicate' in event_json and event_json['duplicate']:
+                    duplicates_skipped += 1
                 else:
-                    event.add("dtstart", start_datetime)
+                    description_array = [event_json["description"]]
+                    if DESCRIPTION_FOOTER is not None:
+                        description_array.append(DESCRIPTION_FOOTER.replace(
+                            "{post_link}",
+                            f"https://instagram.com/p/{post.shortcode}" if not USE_IMGINN_LINK else f"https://imginn.com/p/{post.shortcode}").replace(
+                            "{post_shortcode}", post.shortcode))
+                    if event_json["link"] is not None:
+                        description_array.append(event_json["link"])
 
-                if end_datetime.time() == datetime.time(23, 59, 59):
-                    event.add("dtend", end_datetime.date())
-                else:
-                    event.add("dtend", end_datetime)
+                    event = icalendar.Event()
+                    event.add("summary", event_json["title"])
+                    event.add("description", "\n\n".join(description_array))
+                    event.add("url", event_json["link"])
+                    event.add("location", location(event_json["location"]))
 
-                calendar.add_event(event.to_ical())
-                counter += 1
+                    start_datetime = datetime.datetime.fromisoformat(event_json["start_datetime"])
+                    end_datetime = datetime.datetime.fromisoformat(event_json["end_datetime"])
+
+                    if start_datetime.time() == datetime.time(0, 0, 0):
+                        event.add("dtstart", start_datetime.date())
+                    else:
+                        event.add("dtstart", start_datetime)
+
+                    if end_datetime.time() == datetime.time(23, 59, 59):
+                        event.add("dtend", end_datetime.date())
+                    else:
+                        event.add("dtend", end_datetime)
+
+                    calendar.add_event(event.to_ical())
+                    counter += 1
     return counter, duplicates_skipped
 
 
