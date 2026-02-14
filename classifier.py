@@ -32,8 +32,12 @@ class ClassifierPassResult:
             self.is_event = llm_classify(post)
             self.confidence = "Ok"
         elif self.mode == "basic":
-            self.confidence = "Ok"
-            self.is_event = classic_classifier(post)
+            if post.caption() is None:
+                self.confidence = "Bad"
+                self.is_event = True
+            else:
+                self.confidence = "Ok"
+                self.is_event = classic_classifier(post)
         self.is_run = True
         return self
 
