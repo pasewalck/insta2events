@@ -86,7 +86,7 @@ def llm_parse_events(post: PostTracker, max_attempts: int = 2, attempt: int = 0)
 
 def llm_classify(post: PostTracker):
     prompt = load_ai_prompt(PROMPT_CLASSIFY_FILE).replace(
-        "{input}", post.caption()
+        "{input}", post.caption() if post.caption() is not None else "None"
     )
     response = ask(prompt, MODEL_CLASSIFIER, images=post.get_image_paths(3))
     return response == "True"
