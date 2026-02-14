@@ -7,6 +7,7 @@ from caldav.davclient import DAVClient
 from tracker import use_tracker, PostTracker
 from util.config import LLM_OUTPUT_FILE_NAME, CALDAV_CALENDAR, CALDAV_USERNAME, CALDAV_PASSWORD, CALDAV_URL, \
     DESCRIPTION_FOOTER, USE_IMGINN_LINK
+from util.location import location
 from util.use_json import use_json
 
 
@@ -74,20 +75,6 @@ def push_events(calendar, post: PostTracker):
                     calendar.add_event(event.to_ical())
                     counter += 1
     return counter, duplicates_skipped
-
-
-def location(location_json):
-    type = location_json["type"]
-    offline_address = location_json["offline_address"]
-    online_link = location_json["online_link"]
-    if type == "Unknown" or type == "International" or type == "Bundesweit":
-        return type
-    elif type == "Online":
-        return online_link if online_link else "Unknown"
-    elif type == "Offline":
-        return offline_address if offline_address else "Unknown"
-    elif type == "Hybrid":
-        return f"Hybrid: {offline_address} | {online_link}"
 
 
 if __name__ == "__main__":
