@@ -13,15 +13,17 @@ Das Schema:
 events: liste
     title: String; Alle wichtigen Informationen auf einen Blick. Nur "Day of Action" ist zu unkonkret, konkrete Themen benennen!
     location: Der Ort an dem der Termin stattfindet. Wenn das unklar ist, lass das Feld leer.
-        type: Enum['Hybrid', 'Online', 'Offline', 'Bundesweit', 'International', 'Unknown']; Nutze 'Bundesweit' und 'International' nur, wenn es klar so benannt wird.
-        offline_address: String | None
+        type: Enum['Hybrid', 'Online','Regional', 'Offline', 'Bundesweit', 'International', 'Unknown']; Nutze 'Bundesweit' und 'International' nur, wenn es klar so benannt wird.
+        offline_address: String | None; Füge bei Straßennamen immer die Stadt hinzu.
+        regional_region: String | None; Bei regionalem Type die Bezeichnung der Region.
         online_link: String | None
     start_datetime: ISO formatted datetime
     end_datetime: ISO formatted datetime
-    description: String; Beschreibung des Termins sowie Aufruf zur Teilnahme. Nutze immer Formulierungen aus dem Beitrag.
+    description: String; Beschreibung des Termins sowie Aufruf zur Teilnahme. Nutze falls sinnvoll Formulierungen aus dem Beitrag.
     link: String; Link zu dem Termin oder mehr Informationen über den Termin. Kein Link zu anderen Dingen.
 
 Es ist möglich, dass ein Instagram-Beitrag keine Termine enthält. Gebe nur dann Termine aus, wenn wirklich genug Informationen da sind.
+Passe bei mehreren Terminen mit unterschiedlichen Orten die Titel sinnvoll.
 Wenn kein Jahr gefunden wird, nutze das Datum des Beitrags. Jahr des Beitrags: {year}.
 
 Caption des Instagram-Beitrags:
