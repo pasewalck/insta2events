@@ -1,5 +1,7 @@
+import time
 from datetime import datetime
 from itertools import dropwhile, takewhile
+from random import Random
 
 import instaloader
 from instaloader import Instaloader, Profile, QueryReturnedNotFoundException, Hashtag
@@ -13,6 +15,7 @@ account_usernames = SCRAPE_ACCOUNTS.split(",") if SCRAPE_ACCOUNTS != "" else []
 hashtags = SCRAPE_HASHTAGS.split(",") if SCRAPE_ACCOUNTS != "" else []
 
 until = datetime.now()
+random = Random()
 
 
 def download(instaloader_instance: Instaloader, mode, target_username_or_hashtag: str,
@@ -29,7 +32,6 @@ def download(instaloader_instance: Instaloader, mode, target_username_or_hashtag
         return
 
     identifier = f"profile.{item.userid}" if mode is Profile else f"hashtag.{item.name}"
-
     posts = item.get_posts() if mode is Profile else item.get_posts_resumable()
     sync_state = sync_tracker.sync_states.get(identifier, datetime.fromisoformat(SYNC_SINCE))
 
@@ -38,7 +40,14 @@ def download(instaloader_instance: Instaloader, mode, target_username_or_hashtag
     posts_to_download = takewhile(lambda p: p.date > sync_state, dropwhile(lambda p: p.date > until, posts))
     posts_count = 0
 
+    _posts_to_download = []
+
+    posts_total_count = 0
     for post in posts_to_download:
+        posts_total_count += 1
+        _posts_to_download.append(post)
+
+    for post in _posts_to_download:
         instaloader_instance.download_post(post, post.mediaid)
         account_details = AccountDetails(
             post.owner_profile.username,
@@ -57,10 +66,12 @@ def download(instaloader_instance: Instaloader, mode, target_username_or_hashtag
                                                            account_details)
 
         posts_count += 1
-        print(f"{posts_count}/?")
+        print(f"{posts_count}/{posts_total_count}: https://imginn.com/p/{post.shortcode}")
 
     sync_tracker.sync_states[identifier] = until
     print(f"Scraped {posts_count} for {identifier}")
+
+    time.sleep(random.randint(1, 2))
 
 
 def main():
