@@ -149,6 +149,26 @@ def llm_parse_events(post: PostTracker, max_attempts: int = 2, attempt: int = 0)
             return [], prompt
 
 
+def validate_llm_fix_location_response(response_to_check):
+    if response_to_check is None:
+        raise ValidationFunctionError("Response is None.")
+    if Nominatim().get_location_details(response_to_check) is None:
+        raise ValidationFunctionError("Response does not return valid lookup result.")
+
+
+def llm_fix_location(event: str):
+    prompt = load_ai_prompt(PROMPT_FIX_LOCATION_FILE).replace(
+        "{input}", event
+    )
+    try:
+        response = ask(prompt, MODEL_FIX_LOCATION, tools=[open_street_map_lookup, web_search_place],
+                       validate=validate_llm_fix_location_response,
+                       max_validation_tries=2)
+        return response
+    except ValidationFunctionMaxTriesError:
+        return None
+
+
 def llm_classify(post: PostTracker):
     prompt = load_ai_prompt(PROMPT_CLASSIFY_FILE).replace(
         "{input}", post.caption() if post.caption() is not None else "None"
