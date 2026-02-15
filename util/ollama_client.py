@@ -146,7 +146,7 @@ def llm_parse_events(post: PostTracker, max_attempts: int = 2, attempt: int = 0)
         if attempt < max_attempts:
             return llm_parse_events(post, max_attempts, attempt + 1)
         else:
-            return [], prompt
+            return None, prompt
 
 
 def validate_llm_fix_location_response(response_to_check):
