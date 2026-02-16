@@ -13,7 +13,9 @@ LLM_OUTPUT_FILE_NAME = os.getenv("LLM_OUTPUT_FILE_NAME", "result_llm.json")
 LLM_PROMPT_OUTPUT_FILE_NAME = os.getenv("LLM_PROMPT_OUTPUT_FILE_NAME", "prompt_llm.txt")
 PROMPT_CLASSIFY_FILE = os.getenv("PROMPT_VALUE_FILE", "./prompts/de/prompt-value.txt")
 PROMPT_FIX_LOCATION_FILE = os.getenv("PROMPT_FIX_LOCATION_FILE", "./prompts/de/prompt-fix-location.txt")
+WEB_SEARCH_ANALYSE_FILE = os.getenv("PROMPT_FIX_LOCATION_FILE", "./prompts/de/web-search-analyse.txt")
 PROMPT_INTERPRETER_FILE = os.getenv("PROMPT_PARSE_FILE", "./prompts/de/prompt-parse.txt")
+SEARCH_PLACE_TEMPLATE = "Adresse {place_name}"
 LLM_PASS_IMAGES_DIRECTLY = os.getenv("LLM_PASS_IMAGES_DIRECTLY", "False") == "True"
 MODEL_CLASSIFIER = os.getenv("MODEL_CLASSIFIER", "gemma3:4b")
 MODEL_FIX_LOCATION = os.getenv("MODEL_FIX_LOCATION", "gemma3:4b")

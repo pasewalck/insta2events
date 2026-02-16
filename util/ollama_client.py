@@ -2,13 +2,14 @@ import datetime
 import json
 from typing import Literal, Any
 
-from ollama import Client, ResponseError, WebSearchResponse
+from ollama import Client, ResponseError
 from pydantic import BaseModel, ValidationError
 from retry import retry
 
 from tracker import PostTracker
 from util.config import PROMPT_INTERPRETER_FILE, PROMPT_CLASSIFY_FILE, \
-    MODEL_INTERPRETER, MODEL_CLASSIFIER, OLLAMA_KEY, MODEL_FIX_LOCATION, PROMPT_FIX_LOCATION_FILE
+    MODEL_INTERPRETER, MODEL_CLASSIFIER, OLLAMA_KEY, MODEL_FIX_LOCATION, PROMPT_FIX_LOCATION_FILE, \
+    SEARCH_PLACE_TEMPLATE, WEB_SEARCH_ANALYSE_FILE
 from util.files_operations import load_file
 from util.nominatim import Nominatim
 
@@ -71,7 +72,7 @@ def open_street_map_lookup(query: str) -> list[Any]:
     return [item["display_name"] for item in results]
 
 
-def web_search_place(place_name: str) -> WebSearchResponse:
+def web_search_place(place_name: str) -> str:
     """Search the web for a place
 
     Args:
@@ -80,7 +81,28 @@ def web_search_place(place_name: str) -> WebSearchResponse:
     Returns:
       Any results
     """
-    return client.web_search(f"Address for {place_name}")
+    query = SEARCH_PLACE_TEMPLATE.replace("{place_name}", place_name)
+    results = client.web_search(query).results
+    limited_results = []
+
+    def truncate_content(content, char_limit):
+        return content[:char_limit] + '...' if len(content) > char_limit else content
+
+    for result in results:
+        snippet = truncate_content(result['content'], 1000)
+        title = result['title']
+
+        limited_results.append({
+            'title': title,
+            'snippet': snippet
+        })
+
+    prompt = load_ai_prompt(WEB_SEARCH_ANALYSE_FILE).replace(
+        "{input}", json.dumps(limited_results)
+    )
+    response = ask(prompt, MODEL_FIX_LOCATION)
+
+    return response
 
 
 available_functions = {
@@ -106,6 +128,8 @@ def ask_loop(messages, model, temperature: int = 0, tools=None, validate=None, v
                 messages.append({'role': 'tool', 'tool_name': tc.function.name, 'content': str(result)})
             else:
                 messages.append({'role': 'tool', 'tool_name': tc.function.name, 'content': "None"})
+        for m in messages:
+            print(f" - {m}")
         return ask_loop(messages, model, temperature, tools, validate, validation_tries_left)
     else:
         if validate is not None:
@@ -116,6 +140,7 @@ def ask_loop(messages, model, temperature: int = 0, tools=None, validate=None, v
                     raise ValidationFunctionMaxTriesError(str(e))
                 messages.append({"role": "user", "content": f"Result validation failed with error: {str(e)}"})
                 return ask_loop(messages, model, temperature, tools, validate, validation_tries_left - 1)
+
         return response_content
 
 
