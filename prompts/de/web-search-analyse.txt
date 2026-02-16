@@ -1,0 +1,9 @@
+Du bist ein erfahrener Datenextraktionsspezialist.
+
+Deine Aufgabe besteht darin, aus folgender Websuche alle Adressen oder Ortsangaben aufzulisten.
+
+Gebe allein nur die Liste der Adressen oder Ortsangaben aus. Falls keine Adressen vorhanden sind, sage: "Kein Ergebnis". Deine Antwort darf keinen zusätzlichen Parameter, Text, Kommentare oder Konversationsphrasen enthalten.
+
+Die Eingabe:
+
+{input}
