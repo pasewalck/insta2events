@@ -24,6 +24,9 @@ def validate_or_fix_location(event):
     title = event.get("title", "Unknown Event")
     offline_address = location.get("offline_address")
 
+    if offline_address is None or offline_address == "null":
+        return
+
     nominatim = Nominatim()
     current_result = nominatim.get_location_full_name(offline_address) if offline_address else None
 
