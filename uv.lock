@@ -467,6 +467,7 @@ dependencies = [
     { name = "easyocr" },
     { name = "instaloader" },
     { name = "ollama" },
+    { name = "requests" },
     { name = "retry" },
     { name = "supervision" },
 ]
@@ -476,22 +477,23 @@ requires-dist = [
     { name = "caldav", specifier = ">=2.2.3" },
     { name = "dotenv", specifier = ">=0.9.9" },
     { name = "easyocr", specifier = "==1.7.2" },
-    { name = "instaloader", specifier = "==4.15" },
+    { name = "instaloader", specifier = "==4.15.1" },
     { name = "ollama", specifier = "==0.4.4" },
+    { name = "requests", specifier = ">=2.31.0" },
     { name = "retry", specifier = ">=0.9.2" },
     { name = "supervision", specifier = ">=0.27.0" },
 ]
 
 [[package]]
 name = "instaloader"
-version = "4.15"
+version = "4.15.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d1/38/f82de9f71d6b8403f5b752d8eab4e466ac99c237ec8c642548a544948f23/instaloader-4.15.tar.gz", hash = "sha256:baf1c29ba16f9d30f7c6e330a00bc1fca100522bb3a217d3c36ad620eb744685", size = 66295, upload-time = "2025-11-08T21:30:32.06Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b0/1f/c66c9d5c65bd59cf03632adf112a05aad720b0620f52848d1e5419ef130b/instaloader-4.15.1.tar.gz", hash = "sha256:323ee2015540e627df25535703f246dc39695b71f7f04dadfe67e239dadf3b55", size = 67082, upload-time = "2026-03-21T21:07:42.55Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/96/7a/2e878dff89aa2ec8ffa6367aad31975e5d457ff303b8ea7568fd284e301c/instaloader-4.15-py3-none-any.whl", hash = "sha256:ba897ec738c238bdc427ad3f4a3478c6d2db07055361f2373779af8227ac2c08", size = 68310, upload-time = "2025-11-08T21:30:30.777Z" },
+    { url = "https://files.pythonhosted.org/packages/cc/4a/33099e653b4d9228920a0596a413770b20de978407a0ba0e16319b234931/instaloader-4.15.1-py3-none-any.whl", hash = "sha256:d89544b841d3d2471d6e270568474a0f022daaf392c2836499c51b332bcd530e", size = 69092, upload-time = "2026-03-21T21:07:41.196Z" },
 ]
 
 [[package]]
