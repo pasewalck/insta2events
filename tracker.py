@@ -44,11 +44,15 @@ class InterpretationDetails:
 
 
 class AccountDetails:
-    def __init__(self, name, userid, bio, link):
+    def __init__(self, name, userid, bio, links=None, link=None):
         self.name = name
         self.userid = userid
         self.bio = bio
-        self.link = link
+
+        if links is None:
+            self.links = [] if link is None else [link]
+        self.links = links
+        self.link = self.links[0] if len(self.links) > 0 else None
 
 
 class SocialMediaTracker:

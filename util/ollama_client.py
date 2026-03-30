@@ -152,7 +152,9 @@ def llm_parse_events(post: PostTracker, max_attempts: int = 2, attempt: int = 0)
     prompt = load_ai_prompt(PROMPT_INTERPRETER_FILE).replace(
         "{input}", post.caption() if post.caption() is not None else "None"
     ).replace(
-        "{owner_link}", post.account_details.link if post.account_details.link is not None else "None"
+        "{owner_link}", ", ".join(post.account_details.links) if hasattr(post.account_details,
+                                                                         "links") and post.account_details.links is not None else (
+            post.account_details.link if post.account_details.link is not None else "None")
     ).replace(
         "{owner_name}", post.account_details.name
     ).replace(
