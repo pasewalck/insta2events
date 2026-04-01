@@ -31,6 +31,7 @@ RERUN_INTERPRETER = os.getenv("RERUN_INTERPRETER", "False") == "True"
 RERUN_CLASSIFIER = os.getenv("RERUN_CLASSIFIER", "False") == "True"
 SYNC_SINCE = os.getenv("SYNC_SINCE", datetime(2026, 1, 1).isoformat())
 USE_IMGINN_LINK = os.getenv("USE_IMGINN_LINK", "False") == "True"
+APIFY_API_TOKEN = os.getenv("APIFY_API_TOKEN")
 
 CALDAV_URL = os.getenv("CALDAV_URL")
 CALDAV_USERNAME = os.getenv("CALDAV_USERNAME")

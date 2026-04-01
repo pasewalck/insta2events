@@ -33,5 +33,8 @@ Caption des Instagram-Beitrags:
 Zusätzliche Informationen über den Account hinter dem Instagram-Beitrag:
 Name: {owner_name}
 Bio: {owner_bio}
-Link: {owner_link}
+
+Profile External Links:
+
+{owner_links}
 

@@ -1,13 +1,14 @@
 import os
 from typing import ContextManager
 
+from util.apify.models import ExternalUrl
 from util.config import DATA_PARENT_FOLDER, SYNC_FILE_NAME, POSTS_FOLDER_NAME
 from util.files_operations import load_file
 from util.use_pickel import use_pickel
 
 
 class PostTracker:
-    def __init__(self, media_id, shortcode, likes, date, photos_downloaded, source, account_details):
+    def __init__(self, media_id, shortcode, likes, date, photos_downloaded, account_details, source=None):
         self.media_id = media_id
         self.shortcode = shortcode
         self.date = date
@@ -19,7 +20,7 @@ class PostTracker:
         self.classified_as_event = False
         self.interpretation_details: [InterpretationDetails] = []
         self.account_details: AccountDetails = account_details
-        self.sources = [source]
+        self.sources = [source] if source else []
 
     def directory(self):
         return os.path.join(DATA_PARENT_FOLDER, POSTS_FOLDER_NAME, f"{self.media_id}")
@@ -51,13 +52,14 @@ class AccountDetails:
 
         if links is None:
             self.links = [] if link is None else [link]
-        self.links = links
+        self.links: list[ExternalUrl] = links
         self.link = self.links[0] if len(self.links) > 0 else None
 
 
 class SocialMediaTracker:
     def __init__(self, sync_start_state=None):
         self.posts = {}
+        self.last_sync = None
         self.sync_states = {}
 
 
