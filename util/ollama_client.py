@@ -117,6 +117,7 @@ def ask_loop(messages, model, temperature: int = 0, tools=None, validate=None, v
         model=model,
         messages=messages,
         tools=tools,
+        stream=False,
         options={'temperature': temperature},
     )
     response_content = response.message.content
@@ -152,17 +153,14 @@ def llm_parse_events(post: PostTracker, max_attempts: int = 2, attempt: int = 0)
     prompt = load_ai_prompt(PROMPT_INTERPRETER_FILE).replace(
         "{input}", post.caption() if post.caption() is not None else "None"
     ).replace(
-        "{owner_link}", ", ".join(post.account_details.links) if hasattr(post.account_details,
-                                                                         "links") and post.account_details.links is not None else (
-            post.account_details.link if post.account_details.link is not None else "None")
-    ).replace(
         "{owner_name}", post.account_details.name
     ).replace(
         "{owner_bio}", post.account_details.bio
     ).replace(
         "{scheme}", json.dumps(Events.model_json_schema(), indent=2)
-    ).replace("{year}", f"{post.date.year}")
-
+    ).replace("{year}", f"{post.date.year}").replace("{owner_links}",
+                                                     "\n".join([f" - {link.title}: {link.url}" for link in
+                                                                post.account_details.links]))
     response = ask(prompt, MODEL_INTERPRETER, images=post.get_image_paths(3), temperature=attempt)
     parsed = response.replace("```json", "").replace("```", "")
 
