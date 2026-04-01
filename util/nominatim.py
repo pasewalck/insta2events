@@ -6,7 +6,7 @@ class Nominatim:
         self.base_url = "https://nominatim.openstreetmap.org/search"
 
     def query(self, query: str, limit=1):
-        headers = {'User-Agent': 'YourAppName/1.0'}
+        headers = {'User-Agent': 'Instagram2Events/1.0'}
         response = requests.get(self.base_url, params={
             'format': 'json',
             'addressdetails': 1,
