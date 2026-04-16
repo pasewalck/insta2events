@@ -150,4 +150,4 @@ def get_posts(username_inputs: List[str], since: datetime) -> List[Post]:
         "searchType": "hashtag",
     }
     result = run(payload)
-    return [Post.from_dict(item) for item in result]
+    return list(filter(lambda p: p.ownerUsername is not None, [Post.from_dict(item) for item in result]))
