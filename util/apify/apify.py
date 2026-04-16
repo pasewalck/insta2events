@@ -124,6 +124,7 @@ def run(payload):
 def get_profiles(
         usernames: List[str],
 ) -> List[Profile]:
+    usernames.sort()
     urls = [f"https://www.instagram.com/{username}" for username in usernames]
     payload = {
         "addParentData": False,
