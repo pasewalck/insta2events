@@ -31,6 +31,7 @@ def download(usernames: list[str], sync_tracker: SocialMediaTracker):
         owner_usernames.add(post.ownerUsername)
 
     profiles = get_profiles(list(owner_usernames))
+
     profile_map = {}
     account_detail_map = {}
     for profile in profiles:
@@ -93,7 +94,7 @@ def main():
             f"All new content was scraped. Updating sync state to: {until.strftime('%Y-%m-%d %H:%M:%S')}"
         )
 
-        sync_tracker.sync_state = until
+        sync_tracker.last_sync = until
 
 
 if __name__ == "__main__":
