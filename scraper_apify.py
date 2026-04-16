@@ -14,7 +14,8 @@ from util.config import SCRAPE_ACCOUNTS, SCRAPE_HASHTAGS, DOWNLOAD_PHOTOS
 account_usernames = SCRAPE_ACCOUNTS.split(",") if SCRAPE_ACCOUNTS != "" else []
 hashtags = SCRAPE_HASHTAGS.split(",") if SCRAPE_ACCOUNTS != "" else []
 
-until = datetime.now()
+now = datetime.now()
+until = datetime(now.year, now.month, now.day, 0, 0, 0)
 random = Random()
 
 
