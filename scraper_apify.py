@@ -44,7 +44,12 @@ def download(usernames: list[str], sync_tracker: SocialMediaTracker):
         )
 
     for idx, post in enumerate(posts):
+        if sync_tracker.posts.get(post.id) is not None:
+            print(f"Skipping Post {idx}/{len(posts)}")
+            continue
+
         print(f"Saving Post {idx}/{len(posts)}")
+
         sync_tracker.posts[post.id] = PostTracker(
             media_id=post.id,
             shortcode=post.shortCode,
