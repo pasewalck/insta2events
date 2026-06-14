@@ -1,3 +1,5 @@
+import time
+
 import requests
 
 
@@ -14,6 +16,7 @@ class Nominatim:
             'q': query
         }, headers=headers)
 
+        time.sleep(1)
         # Check for a successful response
         response.raise_for_status()  # Raise an error for bad responses
         return response.json()
