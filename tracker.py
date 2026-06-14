@@ -25,6 +25,9 @@ class PostTracker:
     def directory(self):
         return os.path.join(DATA_PARENT_FOLDER, POSTS_FOLDER_NAME, f"{self.media_id}")
 
+    def has_results(self):
+        return os.path.exists(os.path.join(self.directory(), "result_llm.json"))
+
     def get_image_paths(self, limit=100):
         image_paths = []
         i = 0
