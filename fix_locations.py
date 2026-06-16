@@ -52,7 +52,7 @@ def process_post(post):
     json_path = os.path.join(post.directory(), LLM_OUTPUT_FILE_NAME)
 
     with use_json(json_path) as json_data:
-        events = json_data.get("events", [])
+        events = json_data if type(json_data) is list else json_data.get("events", [])
         for event in events:
             if not event.get("ran_location_validation", False):
                 validate_or_fix_location(event)
