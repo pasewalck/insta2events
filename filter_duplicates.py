@@ -38,7 +38,7 @@ def main():
                                     equal_word_count_ort = sum(1 for word in location1 if word in location2)
 
                                     if equal_word_count_title > len(title2) / 2 and equal_word_count_ort > len(
-                                            title1) / 2:
+                                            title1) / 3:
                                         print(
                                             f"Marking Duplicate (Found via Date and Title and Ort Matching): {event_json['title']}  {key}")
                                         event_json['duplicate'] = True
