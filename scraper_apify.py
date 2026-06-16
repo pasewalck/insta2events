@@ -25,6 +25,8 @@ def download(usernames: list[str], sync_tracker: SocialMediaTracker):
         if hasattr(sync_tracker, "last_sync") and sync_tracker.last_sync
         else datetime.fromisoformat(config.SYNC_SINCE)
     )
+    print(f"Syncing from {sync_since}")
+
     posts = get_posts(usernames, sync_since)
     owner_usernames = set()
     for post in posts:
@@ -61,6 +63,7 @@ def download(usernames: list[str], sync_tracker: SocialMediaTracker):
         _save_post_data(post.images if len(post.images) > 0 else [post.displayUrl], post.caption,
                         sync_tracker.posts[post.id].directory(),
                         DOWNLOAD_PHOTOS)
+    sync_tracker.last_sync = until
 
 
 def _save_post_data(image_urls: list, caption: str, post_dir: str, download_photos: bool) -> None:
@@ -98,8 +101,6 @@ def main():
         print(
             f"All new content was scraped. Updating sync state to: {until.strftime('%Y-%m-%d %H:%M:%S')}"
         )
-
-        sync_tracker.last_sync = until
 
 
 if __name__ == "__main__":
