@@ -62,15 +62,15 @@ def push_events(calendar, post: PostTracker):
                     start_datetime = datetime.datetime.fromisoformat(event_json["start_datetime"])
                     end_datetime = datetime.datetime.fromisoformat(event_json["end_datetime"])
 
-                    is_datetime_start = start_datetime.time() == datetime.time(0, 0, 0)
-                    is_datetime_end = end_datetime.time() == datetime.time(23, 59, 59)
+                    is_datetime_start_day_start = start_datetime.time() == datetime.time(0, 0, 0)
+                    is_datetime_end_day_end = end_datetime.time() == datetime.time(23, 59, 59)
 
-                    if is_datetime_start and is_datetime_end:
+                    if is_datetime_start_day_start and is_datetime_end_day_end:
                         event.add("dtstart", start_datetime.date())
                     else:
                         event.add("dtstart", start_datetime)
 
-                    if is_datetime_start and is_datetime_end:
+                    if is_datetime_start_day_start and is_datetime_end_day_end:
                         event.add("dtend", end_datetime.date())
                     else:
                         event.add("dtend", end_datetime)
