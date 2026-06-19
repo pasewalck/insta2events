@@ -15,6 +15,7 @@ PROMPT_CLASSIFY_FILE = os.getenv("PROMPT_VALUE_FILE", "./prompts/de/prompt-value
 PROMPT_FIX_LOCATION_FILE = os.getenv("PROMPT_FIX_LOCATION_FILE", "./prompts/de/prompt-fix-location.txt")
 WEB_SEARCH_ANALYSE_FILE = os.getenv("PROMPT_FIX_LOCATION_FILE", "./prompts/de/web-search-analyse.txt")
 PROMPT_INTERPRETER_FILE = os.getenv("PROMPT_PARSE_FILE", "./prompts/de/prompt-parse.txt")
+PROMPT_DUPLICATE_FILE = os.getenv("PROMPT_PARSE_FILE", "./prompts/de/check-duplicate.txt")
 SEARCH_PLACE_TEMPLATE = "Adresse {place_name}"
 LLM_PASS_IMAGES_DIRECTLY = os.getenv("LLM_PASS_IMAGES_DIRECTLY", "False") == "True"
 MODEL_CLASSIFIER = os.getenv("MODEL_CLASSIFIER", "gemma3:4b")

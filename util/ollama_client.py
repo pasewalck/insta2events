@@ -9,7 +9,7 @@ from retry import retry
 from tracker import PostTracker
 from util.config import PROMPT_INTERPRETER_FILE, PROMPT_CLASSIFY_FILE, \
     MODEL_INTERPRETER, MODEL_CLASSIFIER, OLLAMA_KEY, MODEL_FIX_LOCATION, PROMPT_FIX_LOCATION_FILE, \
-    SEARCH_PLACE_TEMPLATE, WEB_SEARCH_ANALYSE_FILE
+    SEARCH_PLACE_TEMPLATE, WEB_SEARCH_ANALYSE_FILE, PROMPT_DUPLICATE_FILE
 from util.files_operations import load_file
 from util.nominatim import Nominatim
 
@@ -147,6 +147,16 @@ def ask_loop(messages, model, temperature: int = 0, tools=None, validate=None, v
 
 def load_ai_prompt(file_path):
     return load_file(file_path)
+
+
+def compare_duplicate(event_1: json, event_2: json):
+    prompt = load_ai_prompt(PROMPT_DUPLICATE_FILE).replace(
+        "{input_1}", json.dumps(event_1)
+    ).replace(
+        "{input_2}", json.dumps(event_2)
+    )
+    response = ask(prompt, MODEL_CLASSIFIER)
+    return response == "True"
 
 
 def llm_parse_events(post: PostTracker, max_attempts: int = 2, attempt: int = 0):
