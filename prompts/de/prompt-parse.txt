@@ -23,8 +23,8 @@ events: liste
     link: String; Link zu dem Termin oder mehr Informationen über den Termin. Kein Link zu anderen Dingen.
 
 Es ist möglich, dass ein Instagram-Beitrag keine Termine enthält. Gebe nur dann Termine aus, wenn wirklich genug Informationen da sind.
-Passe bei mehreren Terminen mit unterschiedlichen Orten die Titel sinnvoll.
-Wenn kein Jahr gefunden wird, nutze das Datum des Beitrags. Jahr des Beitrags: {year}.
+Passe bei mehreren Terminen mit unterschiedlichen Orten die Titel sinnvoll an. Wenn Termine nicht ganz tätig sind und nur eine Begin-Uhrzeit und keine End-Uhrzeit haben, nehme eine realistische Dauer an und ermittle daraus die End-Uhrzeit. z. B. für einen Film 3 Stunden. B. für einen Film 3 Stunden.
+Wenn kein Jahr gefunden wird, nutze das Jahr, in dem der Beitrag erschien. Jahr des Beitrags: {year}.
 
 Caption des Instagram-Beitrags:
 
