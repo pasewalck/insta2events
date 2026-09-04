@@ -25,20 +25,16 @@ def main():
                                 datetime_map[key_datetime] = []
                                 datetime_map[key_datetime].append(event_json)
                                 event_json['duplicate'] = False
-
-                                if "duplicate" in event_json:
-
-                                    if not event_json['duplicate']:
-                                        for compare_event_json in datetime_map[key_datetime]:
-                                            if compare_duplicate(event_json, compare_event_json):
-                                                print(
-                                                    f"Marking Duplicate (LLM Matching): {event_json['title']}")
-                                                event_json['duplicate'] = True
-                                                break
-                                        if not event_json['duplicate']:
-                                            datetime_map[key_datetime].append(event_json)
-                                    else:
-                                        event_json['duplicate'] = False
+                            elif "duplicate" not in event_json:
+                                is_duplicate = False
+                                for compare_event_json in datetime_map[key_datetime]:
+                                    if compare_duplicate(event_json, compare_event_json):
+                                        print(f"Marking Duplicate (LLM Matching): {event_json['title']}")
+                                        is_duplicate = True
+                                        break
+                                event_json['duplicate'] = is_duplicate
+                            elif "duplicate" in event_json and not event_json['duplicate']:
+                                datetime_map[key_datetime].append(event_json)
 
 
 if __name__ == "__main__":
