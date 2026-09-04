@@ -18,8 +18,8 @@ PROMPT_INTERPRETER_FILE = os.getenv("PROMPT_PARSE_FILE", "./prompts/de/prompt-pa
 PROMPT_DUPLICATE_FILE = os.getenv("PROMPT_PARSE_FILE", "./prompts/de/check-duplicate.txt")
 SEARCH_PLACE_TEMPLATE = "Adresse {place_name}"
 LLM_PASS_IMAGES_DIRECTLY = os.getenv("LLM_PASS_IMAGES_DIRECTLY", "False") == "True"
-MODEL_CLASSIFIER = os.getenv("MODEL_CLASSIFIER", "gemma3:4b")
-MODEL_FIX_LOCATION = os.getenv("MODEL_FIX_LOCATION", "gemma3:4b")
+MODEL_CLASSIFIER = os.getenv("MODEL_CLASSIFIER", "gemma3:8b")
+MODEL_FIX_LOCATION = os.getenv("MODEL_FIX_LOCATION", "gemma3:8b")
 MODEL_INTERPRETER = os.getenv("MODEL_INTERPRETER", "llama3.2-vision")
 DOWNLOAD_PHOTOS = os.getenv("DOWNLOAD_PHOTOS", "True") == "True"
 INTERPRETER_CLASSIFIER_MODE = os.getenv("INTERPRETER_CLASSIFIER_MODE", "basic")
@@ -30,7 +30,7 @@ SCRAPE_HASHTAGS = os.getenv("SCRAPE_HASHTAGS", "")
 SAVE_PROMPT = os.getenv("SAVE_PROMPT", "False") == "True"
 RERUN_INTERPRETER = os.getenv("RERUN_INTERPRETER", "False") == "True"
 RERUN_CLASSIFIER = os.getenv("RERUN_CLASSIFIER", "False") == "True"
-SYNC_SINCE = os.getenv("SYNC_SINCE", datetime(2026, 1, 1).isoformat())
+SYNC_SINCE = os.getenv("SYNC_SINCE", datetime(2026, 6, 13).isoformat())
 USE_IMGINN_LINK = os.getenv("USE_IMGINN_LINK", "False") == "True"
 APIFY_API_TOKEN = os.getenv("APIFY_API_TOKEN")
 
