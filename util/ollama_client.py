@@ -129,8 +129,6 @@ def ask_loop(messages, model, temperature: int = 0, tools=None, validate=None, v
                 messages.append({'role': 'tool', 'tool_name': tc.function.name, 'content': str(result)})
             else:
                 messages.append({'role': 'tool', 'tool_name': tc.function.name, 'content': "None"})
-        for m in messages:
-            print(f" - {m}")
         return ask_loop(messages, model, temperature, tools, validate, validation_tries_left)
     else:
         if validate is not None:
