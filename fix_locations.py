@@ -64,8 +64,16 @@ def main():
         posts = sync_tracker.posts.values()
         sorted_posts = sort_posts_by_likes(posts)
 
+        targets = []
         for post in sorted_posts:
-            process_post(post)
+            if post.interpreted and not post.caldav_pushed:
+                targets.append(post)
+        count = 0
+        for post in targets:
+            count += 1
+            print(f"Fixing locations {count} / {len(targets)}")
+            if post.interpreted and not post.caldav_pushed:
+                process_post(post)
 
 
 if __name__ == "__main__":
